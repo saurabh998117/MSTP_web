@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* Brand Colors */
+  --bg-primary: #171d2b;     /* Very dark navy */
+  --bg-secondary: #212a3d;   /* Dark navy (cards, etc) */
+  --bg-tertiary: #293448;    /* Logo navy */
+  
+  --text-primary: #F2EDE2;   /* Beige */
+  --text-secondary: #C8D1E0; /* Muted text */
+  --text-dark: #171d2b;      /* Used for text on gold buttons */
+  
+  --accent-primary: #D7B889; /* Gold */
+  --accent-hover: #e4c9a0;
+  
+  --glow-shadow: 0 0 15px rgba(215, 184, 137, 0.4);
+  
+  /* Layout */
+  --max-width: 1200px;
+  --header-height: 80px;
+  
+  /* Border */
+  --border-color: rgba(242, 237, 226, 0.1);
+  --border-radius: 12px;
+}
+
+:root[data-theme='light'] {
+  --bg-primary: #f8f6f0;     /* Beige from screenshots */
+  --bg-secondary: #ffffff;   /* White cards */
+  --bg-tertiary: #e8e2d5;    
+  
+  --text-primary: #171d2b;   /* Dark navy text */
+  --text-secondary: #4a5568; 
+  --text-dark: #F2EDE2;      
+  
+  --accent-primary: #3b82f6; /* Blue buttons from screenshot */
+  --accent-hover: #2563eb;
+  
+  --glow-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
+  
+  --border-color: rgba(23, 29, 43, 0.1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.3s ease;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Utilities */
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.section {
+  padding: 6rem 0;
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 0.8rem 1.8rem;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.btn-primary {
+  background-color: var(--accent-primary);
+  color: var(--text-dark);
+}
+
+.btn-primary:hover {
+  background-color: var(--accent-hover);
+  box-shadow: var(--glow-shadow);
+  transform: translateY(-2px);
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+.btn-outline:hover {
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+}
+
+/* Titles */
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.section-title span {
+  color: var(--accent-primary);
+}

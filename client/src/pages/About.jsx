@@ -1,0 +1,140 @@
+import { useState } from 'react';
+import { CheckCircle2, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import Testimonials from '../components/Testimonials';
+import './About.css';
+import missionImg from '../assets/image 661.png';
+import nitinImg from '../assets/image 12.png';
+
+const leadershipTeam = [
+  { name: 'Nitin Kumar Tiwari', role: 'Founder', image: nitinImg },
+  { name: 'Nikhil Raj Soni', role: 'Managing Director', image: null },
+  { name: 'Dharmendra Chakrawarti', role: 'Head Designer', image: null },
+  { name: 'Om Hardaha', role: 'Website Designer', image: null },
+  { name: 'Saurabh Namdev', role: 'Technical Relationship Manager', image: null },
+];
+
+const About = () => {
+  const [currentLeader, setCurrentLeader] = useState(0);
+
+  const nextLeader = () => {
+    setCurrentLeader((prev) => (prev === leadershipTeam.length - 1 ? 0 : prev + 1));
+  };
+
+  const prevLeader = () => {
+    setCurrentLeader((prev) => (prev === 0 ? leadershipTeam.length - 1 : prev - 1));
+  };
+
+  return (
+    <div className="about-page">
+      {/* Story Section */}
+      <section className="section story-section">
+        <div className="container">
+          <div className="story-grid">
+            <div className="story-image">
+              <img src={missionImg} alt="MAATRSHRI Mission" className="mission-graphic" style={{width: '100%', borderRadius: '12px'}} />
+            </div>
+            <div className="story-content">
+              <h2 className="section-title" style={{textAlign: 'left'}}>Our Story: Who We Are</h2>
+              <p className="story-text">
+                <strong>MAATRSHRI Group</strong> is a trusted technology and business solutions company that helps organizations grow in the digital era through IT Services, IT Consulting, Staffing, Payroll, Outsourcing, and Digital Marketing solutions. The company also works across B2B markets and focuses on innovation and software development to meet global business needs.
+              </p>
+              <p className="story-text">
+                With expertise in platforms like Salesforce, Oracle, Microsoft Dynamics 365, and AWS, along with technologies such as AI, ML, and Blockchain, MAATRSHRI Group helps businesses improve efficiency, boost productivity, and achieve sustainable digital growth through innovative, client-focused solutions.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Vision & Mission */}
+      <section className="section vision-mission">
+        <div className="container">
+          <div className="vm-grid">
+            <div className="vm-card">
+              <h3 className="vm-title">Our Vision</h3>
+              <ul className="vm-list">
+                <li><CheckCircle2 className="vm-icon" size={20} /> To let a globally trusted partner that empowers organizations to adopt innovative technologies and digital solutions with complete confidence.</li>
+                <li><CheckCircle2 className="vm-icon" size={20} /> To drive a future where businesses are more efficient, highly adaptable to market shifts, and capable of achieving long-term sustainable growth.</li>
+              </ul>
+            </div>
+            <div className="vm-card">
+              <h3 className="vm-title">Our Mission</h3>
+              <ul className="vm-list">
+                <li><CheckCircle2 className="vm-icon" size={20} /> To help businesses grow and adapt in the digital world by providing reliable, innovative, and technology-driven solutions.</li>
+                <li><CheckCircle2 className="vm-icon" size={20} /> To empower organizations with smarter and faster ways of working through use of AI, Machine Learning, Blockchain and other advanced technologies.</li>
+                <li><CheckCircle2 className="vm-icon" size={20} /> To help clients improve productivity, streamline workflows, and achieve long-term sustainable growth by combining technology with strategy.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Values */}
+      <section className="section values-section">
+        <div className="container">
+          <div className="values-card">
+            <h3 className="vm-title">Our Values</h3>
+            <ul className="values-list">
+              <li><strong>Innovation</strong> - We embrace modern technologies and digital transformation.</li>
+              <li><strong>Client-focused Approach</strong> - We deliver solutions tailored to business needs within the deadline.</li>
+              <li><strong>Growth & Excellence</strong> - We help businesses improve productivity and efficiency.</li>
+              <li><strong>Collaboration</strong> - We build strong partnerships with clients and teams.</li>
+              <li><strong>Technology-driven Mindset</strong> - We combine strategy with advanced digital solutions.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* Leadership */}
+      <section className="section leadership-section">
+        <div className="container">
+          <h2 className="section-title">Leadership Team</h2>
+          
+          <div className="slider-container" style={{maxWidth: '600px', margin: '0 auto', position: 'relative', padding: '2rem 0'}}>
+            <button onClick={prevLeader} className="slider-btn prev-btn" aria-label="Previous leader">
+              <ChevronLeft size={24} />
+            </button>
+            
+            <div className="leader-card" style={{margin: '0 auto'}}>
+              <div className="leader-image-wrapper">
+                {leadershipTeam[currentLeader].image ? (
+                  <img src={leadershipTeam[currentLeader].image} alt={leadershipTeam[currentLeader].name} className="leader-img" style={{width: '200px', height: '200px'}} />
+                ) : (
+                  <div className="leader-image-placeholder" style={{width: '200px', height: '200px', margin: '0 auto'}}>
+                    <span>{leadershipTeam[currentLeader].name.charAt(0)}</span>
+                  </div>
+                )}
+              </div>
+              <h3 className="leader-name" style={{fontSize: '1.8rem'}}>{leadershipTeam[currentLeader].name}</h3>
+              <p className="leader-role" style={{fontSize: '1.2rem'}}>{leadershipTeam[currentLeader].role}</p>
+            </div>
+            
+            <button onClick={nextLeader} className="slider-btn next-btn" aria-label="Next leader">
+              <ChevronRight size={24} />
+            </button>
+            
+            <div className="slider-dots">
+              {leadershipTeam.map((_, idx) => (
+                <button 
+                  key={idx} 
+                  className={`slider-dot ${idx === currentLeader ? 'active' : ''}`}
+                  onClick={() => setCurrentLeader(idx)}
+                  aria-label={`Go to slide ${idx + 1}`}
+                />
+              ))}
+            </div>
+          </div>
+          
+          <div className="consultation-action" style={{textAlign: 'center', marginTop: '3rem'}}>
+            <Link to="/book" className="btn btn-primary" style={{display: 'inline-block'}}>Book Consultation</Link>
+          </div>
+        </div>
+      </section>
+
+      <Testimonials />
+    </div>
+  );
+};
+
+export default About;

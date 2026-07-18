@@ -1,0 +1,91 @@
+.book-page {
+  padding-top: calc(var(--header-height) + 2rem);
+  padding-bottom: 4rem;
+}
+
+.book-form-container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: var(--bg-primary); /* Beige background */
+  padding: 3rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+}
+
+.book-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.book-header .section-title {
+  margin-bottom: 0.5rem;
+}
+
+.book-header p {
+  color: var(--text-secondary);
+}
+
+.book-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* These share structure with ApplyForm but can be scoped locally if needed */
+.book-form .form-row {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.book-form .form-group.half {
+  flex: 1;
+}
+
+.book-form .form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.book-form .form-group input[type="text"],
+.book-form .form-group input[type="email"],
+.book-form .form-group input[type="tel"],
+.book-form .form-group select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background-color: var(--bg-secondary); /* Usually blue-ish in mockup but we keep to theme */
+  background: rgba(59, 130, 246, 0.03);
+  color: var(--text-primary);
+  font-family: inherit;
+  transition: border-color 0.3s, background-color 0.3s;
+}
+
+.book-form .form-group input:focus,
+.book-form .form-group select:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+  background-color: var(--bg-primary);
+}
+
+.book-form .form-submit-wrapper {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.book-form .submit-btn {
+  background-color: #3b82f6;
+  min-width: 250px;
+}
+
+@media (max-width: 768px) {
+  .book-form .form-row {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .book-form-container {
+    padding: 1.5rem;
+  }
+}
