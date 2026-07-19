@@ -1,5 +1,10 @@
+require('dotenv').config();
+
+console.log("MONGO_URI VALUE ", process.env.MONGO_URI);
 const express = require('express');
 const cors = require('cors');
+const mongoose = require('mongoose');
+require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -7,18 +12,40 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-// Mock Contact endpoint
-app.post('/api/contact', (req, res) => {
+// MongoDB Connection
+mongoose.connect(process.env.MONGO_URI)
+.then(() => console.log("MongoDB Connected "))
+.catch(err => console.log("DB Error:", err));
+
+// Schema
+const contactSchema = new mongoose.Schema({
+  name: String,
+  email: String,
+  subject: String,
+  message: String
+});
+
+const Contact = mongoose.model("Contact", contactSchema);
+
+//  API (NOW SAVES DATA)
+app.post('/api/contact', async (req, res) => {
   const { name, email, subject, message } = req.body;
   
   if (!name || !email || !message) {
     return res.status(400).json({ error: 'Name, email, and message are required.' });
   }
 
-  // TODO: Save to MongoDB when DB is provided
-  console.log('Received new contact submission:', { name, email, subject, message });
+  try {
+    const newContact = new Contact({ name, email, subject, message });
+    await newContact.save();
 
-  res.status(200).json({ message: 'Thank you for reaching out! We will get back to you soon.' });
+    console.log("Saved to DB ");
+
+    res.status(200).json({ message: 'Saved to MongoDB ' });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: 'Database error ❌' });
+  }
 });
 
 app.listen(PORT, () => {
