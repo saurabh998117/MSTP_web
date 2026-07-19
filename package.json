@@ -1,15 +1,9 @@
 {
-  "name": "maatrshri-website",
+  "name": "mstp-web",
   "version": "1.0.0",
-  "description": "MAATRSHRI Website",
-  "main": "index.js",
+  "main": "server/index.js",
   "scripts": {
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "server": "cd server && npm start",
-    "client": "cd client && npm run dev",
-    "install-all": "npm install && cd server && npm install && cd ../client && npm install"
-  },
-  "dependencies": {
-    "concurrently": "^8.2.2"
+    "build": "cd client && npm install && npm run build",
+    "start": "cd server && node index.js"
   }
 }
