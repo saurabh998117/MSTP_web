@@ -1,0 +1,241 @@
+.case-study-page {
+  background-color: #f3ede2; /* Same beige background */
+  min-height: 100vh;
+  color: #1a1a1a;
+}
+
+/* Header Section */
+.cs-header-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  margin-bottom: 5rem;
+  align-items: center;
+}
+
+.cs-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: #1a1a1a;
+}
+
+.cs-description {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: #333;
+}
+
+.cs-header-image {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.cs-hero-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Common Section Styles */
+.cs-section {
+  margin-bottom: 5rem;
+}
+
+.cs-section-title {
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 3rem;
+  color: #1a1a1a;
+}
+
+.highlight-green {
+  color: #00e676; /* Neon green */
+}
+
+/* 01. Challenge */
+.cs-challenge-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.cs-challenge-text {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: #333;
+}
+
+.cs-challenge-icons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.challenge-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-weight: 600;
+  color: #00e676;
+}
+
+.challenge-icon-box {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 02. Process */
+.cs-process-flow {
+  background-color: #0a0a0a;
+  border-radius: 50px;
+  padding: 1.5rem 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.process-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.process-icon-circle {
+  width: 50px;
+  height: 50px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.process-name {
+  font-size: 0.85rem;
+  color: #ccc;
+}
+
+.process-arrow {
+  position: absolute;
+  right: -50%;
+  top: 25px;
+  transform: translateY(-50%);
+  color: #00e676;
+  font-weight: bold;
+}
+
+/* 03. Tools Used */
+.cs-tools-grid {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+
+.tool-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.tool-logo-placeholder {
+  width: 80px;
+  height: 80px;
+  background-color: #0a0a0a;
+  color: #00e676;
+  font-size: 2.5rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+}
+
+/* 04. Testimonial */
+.cs-testimonial-box {
+  background-color: #f3ede2; /* Same as page background but with border */
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  padding: 3rem;
+  max-width: 700px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.quote-icon-large {
+  position: absolute;
+  top: -24px;
+  left: 30px;
+  background-color: #f3ede2;
+  padding: 0 10px;
+}
+
+.cs-testimonial-text {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #333;
+  margin-bottom: 2rem;
+  font-style: italic;
+}
+
+.cs-testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.author-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #00e676;
+}
+
+.author-info h4 {
+  margin: 0 0 0.2rem 0;
+  color: #1a1a1a;
+}
+
+.author-info span {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .cs-header-grid, .cs-challenge-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .process-arrow {
+    display: none;
+  }
+  
+  .cs-process-flow {
+    border-radius: 20px;
+    padding: 2rem;
+  }
+  
+  .process-step {
+    flex: 1 1 30%;
+    margin-bottom: 1rem;
+  }
+}

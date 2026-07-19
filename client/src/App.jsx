@@ -12,6 +12,7 @@ import SuccessPage from './pages/SuccessPage';
 import BookConsultation from './pages/BookConsultation';
 import PrivacyPage from './pages/PrivacyPage';
 import Portfolio from './pages/Portfolio';
+import CaseStudy from './pages/CaseStudy';
 import { servicesData } from './data/servicesData';
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/careers" element={<Careers />} />
             <Route path="/portfolio" element={<Portfolio />} />
+            <Route path="/portfolio/:id" element={<CaseStudy />} />
             <Route path="/services/:serviceId" element={<ServiceTemplate />} />
             <Route path="/apply" element={<ApplyForm />} />
             <Route path="/success" element={<SuccessPage />} />

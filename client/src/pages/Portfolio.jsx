@@ -1,98 +1,72 @@
-import { ExternalLink, Globe } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { portfolioData } from '../data/portfolioData';
 import './Portfolio.css';
 
 const Portfolio = () => {
-  const projects = [
-    {
-      title: 'FinTech Dashboard',
-      category: 'Web Development',
-      image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=600',
-      description: 'A comprehensive financial analytics dashboard for enterprise clients providing real-time data visualization.',
-      tags: ['React', 'Node.js', 'D3.js']
-    },
-    {
-      title: 'E-Commerce Mobile App',
-      category: 'Mobile App Development',
-      image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&q=80&w=600',
-      description: 'A seamless shopping experience for iOS and Android with AR product preview features.',
-      tags: ['React Native', 'Firebase', 'Stripe']
-    },
-    {
-      title: 'Healthcare Management System',
-      category: 'Software Development',
-      image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=600',
-      description: 'A secure, HIPAA-compliant platform for managing patient records and telemedicine appointments.',
-      tags: ['Next.js', 'PostgreSQL', 'AWS']
-    },
-    {
-      title: 'DeFi Wallet',
-      category: 'Web3 Development',
-      image: 'https://images.unsplash.com/photo-1621416894569-0f39ed31d247?auto=format&fit=crop&q=80&w=600',
-      description: 'A decentralized cryptocurrency wallet supporting multiple blockchains and NFT management.',
-      tags: ['Solidity', 'Web3.js', 'React']
-    },
-    {
-      title: 'Smart Factory Automation',
-      category: 'IoT & Automation',
-      image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=600',
-      description: 'IoT sensor dashboard for monitoring assembly line efficiency and predicting maintenance needs.',
-      tags: ['Python', 'MQTT', 'Vue.js']
-    },
-    {
-      title: 'Global Retail CRM',
-      category: 'Salesforce Services',
-      image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=600',
-      description: 'Custom Salesforce implementation consolidating customer data across 500+ global retail stores.',
-      tags: ['Salesforce', 'Apex', 'LWC']
-    }
-  ];
-
   return (
     <div className="portfolio-page">
-      {/* Hero Section */}
-      <section className="portfolio-hero section">
-        <div className="container">
-          <h1 className="section-title">Our <span>Portfolio</span></h1>
-          <p className="portfolio-subtitle">
-            Explore some of our recent projects where we've helped businesses transform their digital presence and operational efficiency.
-          </p>
-        </div>
-      </section>
-
-      {/* Projects Grid */}
-      <section className="projects-section section">
-        <div className="container">
-          <div className="projects-grid">
-            {projects.map((project, idx) => (
-              <div className="project-card" key={idx}>
-                <div className="project-image-wrapper">
-                  <img src={project.image} alt={project.title} className="project-image" />
-                  <div className="project-overlay">
-                    <button className="icon-btn"><ExternalLink size={20} /></button>
-                    <button className="icon-btn"><Globe size={20} /></button>
-                  </div>
+      <div className="container" style={{paddingTop: '8rem', paddingBottom: '4rem'}}>
+        <h2 className="portfolio-main-title">Delivered by WhiteCircle Group</h2>
+        
+        <div className="portfolio-grid">
+          {Object.values(portfolioData).map((project) => (
+            <div className="portfolio-item" key={project.id}>
+              <h3 className="portfolio-item-title">{project.title}</h3>
+              <Link to={`/portfolio/${project.id}`} className="portfolio-image-link">
+                <img src={project.image} alt={project.title} className="portfolio-image" />
+                <div className="portfolio-overlay">
+                  <span className="view-case-study">View Case Study <ArrowRight size={16} /></span>
                 </div>
-                <div className="project-content">
-                  <span className="project-category">{project.category}</span>
-                  <h3>{project.title}</h3>
-                  <p>{project.description}</p>
-                  <div className="project-tags">
-                    {project.tags.map((tag, tIdx) => (
-                      <span className="tag" key={tIdx}>{tag}</span>
-                    ))}
-                  </div>
+              </Link>
+            </div>
+          ))}
+        </div>
+
+        {/* CTA Section */}
+        <div className="portfolio-cta-section">
+          <div className="cta-content">
+            <h2 className="cta-heading">
+              Let's turn your idea into<br />a <span className="highlight-green">real-life product.</span>
+            </h2>
+            <Link to="/contact" className="btn btn-green">
+              <div style={{display: 'flex', alignItems: 'center', gap: '0.5rem', backgroundColor: '#000', padding: '0.3rem', borderRadius: '50%', color: '#00e676'}}>
+                <ArrowRight size={16} />
+              </div>
+              Get In Touch
+              <ArrowRight size={16} style={{marginLeft: 'auto'}} />
+            </Link>
+          </div>
+          <div className="cta-graphic">
+            <div className="idea-illustration">
+              {/* This represents the lightbulb graphic in the screenshot */}
+              <div className="lightbulb-container">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" className="lightbulb-icon">
+                  <path d="M9 21h6" />
+                  <path d="M10 21v-4" />
+                  <path d="M14 21v-4" />
+                  <path d="M12 17v-4" />
+                  <path d="M12 3a6 6 0 0 0-6 6c0 2 1.5 4 2 5" />
+                  <path d="M12 3a6 6 0 0 1 6 6c0 2-1.5 4-2 5" />
+                </svg>
+                <div className="hand-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
+                    <path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2" />
+                    <path d="M14 8a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2" />
+                    <path d="M10 10a2 2 0 0 0-2-2a2 2 0 0 0-2 2v4" />
+                    <path d="M6 14a2 2 0 0 0-2-2a2 2 0 0 0-2 2" />
+                    <path d="M21 11v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7l3-3" />
+                  </svg>
                 </div>
               </div>
-            ))}
-          </div>
-          
-          <div className="portfolio-cta">
-            <h3>Have a project in mind?</h3>
-            <p>Let's discuss how we can bring your vision to life.</p>
-            <a href="/book" className="btn btn-primary">Start a Project</a>
+            </div>
           </div>
         </div>
-      </section>
+        
+        <div style={{display: 'flex', justifyContent: 'center', marginTop: '2rem'}}>
+           <Link to="/book" className="btn btn-primary" style={{backgroundColor: '#2563eb', border: 'none', padding: '0.8rem 2rem'}}>Book Consultation</Link>
+        </div>
+      </div>
     </div>
   );
 };
