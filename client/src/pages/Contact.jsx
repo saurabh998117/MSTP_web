@@ -55,11 +55,22 @@ const Contact = () => {
             
             {/* Contact Info (Left Column) */}
             <div className="contact-info-panel">
-              {/* Map Image Placeholder (Replacing Branding Box) */}
-              <div className="contact-map" style={{height: '250px', backgroundColor: '#e5e7eb', borderRadius: '8px', overflow: 'hidden', position: 'relative', marginBottom: '2rem'}}>
-                <div style={{position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#6b7280', border: '1px dashed #9ca3af', borderRadius: '8px'}}>
-                  [ Google Maps Embedded Iframe ]
-                </div>
+              <h2 className="section-title" style={{textAlign: 'left', marginBottom: '1.5rem'}}>Get In <span>Touch</span></h2>
+              <p className="contact-subtitle">
+                Have questions about our services? Ready to start your digital transformation? Contact our team today.
+              </p>
+              
+              <div className="map-container">
+                <iframe 
+                  src="https://maps.google.com/maps?q=White+Circle+Group,Shahdol&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+                  width="100%" 
+                  height="250" 
+                  style={{border: 0, borderRadius: '8px', marginBottom: '2rem'}} 
+                  allowFullScreen="" 
+                  loading="lazy" 
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="White Circle Group Office Location"
+                ></iframe>
               </div>
 
               <ul className="contact-details">
