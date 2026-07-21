@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 import { MapPin, Mail, Phone } from 'lucide-react';
 import './Footer.css';
-import instaIcon from '../assets/insta.png';
-import linkedinIcon from '../assets/linkdin.png';
+import instaIcon from '../assets/home/insta.png';
+import linkedinIcon from '../assets/home/linkdin.png';
 
 const Footer = () => {
   return (

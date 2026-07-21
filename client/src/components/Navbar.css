@@ -127,11 +127,24 @@
 }
 
 .mega-menu-col li a {
-  color: var(--text-secondary);
+  color: var(--text-primary); /* Use primary text instead of secondary for stronger contrast */
   font-size: 0.95rem;
+  font-weight: 500;
   text-decoration: none;
   transition: color 0.2s;
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.mega-icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  filter: brightness(0) saturate(100%); /* To match screenshot icon colors which are dark/grey */
+}
+[data-theme='dark'] .mega-icon {
+  filter: brightness(0) saturate(100%) invert(1); /* Invert to white in dark mode */
 }
 
 .mega-menu-col li a:hover {

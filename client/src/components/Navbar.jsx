@@ -2,6 +2,36 @@ import { Link, useLocation } from 'react-router-dom';
 import { Sun, Moon } from 'lucide-react';
 import './Navbar.css';
 
+// Import 25 icons mapped to Services
+import iconIT from '../assets/services/new25 8.png';
+import iconSalesforce from '../assets/services/new25 3.png';
+import iconWebDev from '../assets/services/new25 9.png';
+import iconMobile from '../assets/services/mobile.png';
+import iconDigital from '../assets/services/digital.png';
+import iconSoftware from '../assets/services/software.png';
+
+import iconAI from '../assets/services/ai.png';
+import iconIoT from '../assets/services/iot 3.png';
+import iconDatabase from '../assets/services/database.png';
+import iconDataAnalytics from '../assets/services/new25 23.png';
+import iconIndustrial from '../assets/services/new25 24.png';
+import iconTesting from '../assets/services/new25 14.png';
+
+import iconStaffing from '../assets/services/new25 21.png';
+import iconPayment from '../assets/services/payment.png';
+import iconCloud from '../assets/services/cloudhost.png';
+import iconShopify from '../assets/services/cloud.png'; // Fallback
+import iconOracle from '../assets/services/iot 4.png'; // Fallback
+
+import iconICO from '../assets/services/ico 2.png';
+import iconToken from '../assets/services/token.png';
+import iconWeb3 from '../assets/services/web3.png';
+import iconDApp from '../assets/services/iot 6.png'; // Fallback
+import iconWallet from '../assets/services/wallet.png';
+import iconExchange from '../assets/services/exchange.png';
+import iconMLM from '../assets/services/mlm.png';
+import iconDex from '../assets/services/dex 2.png';
+
 const Navbar = ({ theme, toggleTheme }) => {
   const location = useLocation();
 
@@ -29,49 +59,49 @@ const Navbar = ({ theme, toggleTheme }) => {
                 <div className="mega-menu-col">
                   <h4>FOUNDATION</h4>
                   <ul>
-                    <li><Link to="/services/it-services">IT Services</Link></li>
-                    <li><Link to="/services/salesforce-services">Salesforce Services</Link></li>
-                    <li><Link to="/services/web-development">Web Development</Link></li>
-                    <li><Link to="/services/mobile-app">Mobile App Development</Link></li>
-                    <li><Link to="/services/digital-marketing">Digital Marketing Services</Link></li>
-                    <li><Link to="/services/software-development">Software Development</Link></li>
+                    <li><Link to="/services/it-services"><img src={iconIT} className="mega-icon" alt=""/> IT Services</Link></li>
+                    <li><Link to="/services/salesforce-services"><img src={iconSalesforce} className="mega-icon" alt=""/> Salesforce Services</Link></li>
+                    <li><Link to="/services/web-development"><img src={iconWebDev} className="mega-icon" alt=""/> Web Development</Link></li>
+                    <li><Link to="/services/mobile-app"><img src={iconMobile} className="mega-icon" alt=""/> Mobile App Development</Link></li>
+                    <li><Link to="/services/digital-marketing"><img src={iconDigital} className="mega-icon" alt=""/> Digital Marketing Services</Link></li>
+                    <li><Link to="/services/software-development"><img src={iconSoftware} className="mega-icon" alt=""/> Software Development</Link></li>
                   </ul>
                 </div>
 
                 <div className="mega-menu-col">
                   <h4>INNOVATION</h4>
                   <ul>
-                    <li><Link to="/services/ai-services">Artificial Intelligence</Link></li>
-                    <li><Link to="/services/iot">Internet Of Things</Link></li>
-                    <li><Link to="/services/database-design">Database Design</Link></li>
-                    <li><Link to="/services/data-analytics">Data Analytics</Link></li>
-                    <li><Link to="/services/industrial-automation">Industrial Automation</Link></li>
-                    <li><Link to="/services/software-testing">Software Testing</Link></li>
+                    <li><Link to="/services/ai-services"><img src={iconAI} className="mega-icon" alt=""/> Artificial Intelligence</Link></li>
+                    <li><Link to="/services/iot"><img src={iconIoT} className="mega-icon" alt=""/> Internet Of Things</Link></li>
+                    <li><Link to="/services/database-design"><img src={iconDatabase} className="mega-icon" alt=""/> Database Design</Link></li>
+                    <li><Link to="/services/data-analytics"><img src={iconDataAnalytics} className="mega-icon" alt=""/> Data Analytics</Link></li>
+                    <li><Link to="/services/industrial-automation"><img src={iconIndustrial} className="mega-icon" alt=""/> Industrial Automation</Link></li>
+                    <li><Link to="/services/software-testing"><img src={iconTesting} className="mega-icon" alt=""/> Software Testing</Link></li>
                   </ul>
                 </div>
 
                 <div className="mega-menu-col">
                   <h4>ENTERPRISE</h4>
                   <ul>
-                    <li><Link to="/services/staffing">Staffing & Payroll</Link></li>
-                    <li><Link to="/services/payment-gateway">Payment Gateway Service</Link></li>
-                    <li><Link to="/services/cloud-hosting">Cloud & Hosting Service</Link></li>
-                    <li><Link to="/services/shopify-wordpress">Shopify & Wordpress Development</Link></li>
-                    <li><Link to="/services/oracle">Oracle Development & Consulting</Link></li>
+                    <li><Link to="/services/staffing"><img src={iconStaffing} className="mega-icon" alt=""/> Staffing & Payroll</Link></li>
+                    <li><Link to="/services/payment-gateway"><img src={iconPayment} className="mega-icon" alt=""/> Payment Gateway Service</Link></li>
+                    <li><Link to="/services/cloud-hosting"><img src={iconCloud} className="mega-icon" alt=""/> Cloud & Hosting Service</Link></li>
+                    <li><Link to="/services/shopify-wordpress"><img src={iconShopify} className="mega-icon" alt=""/> Shopify & Wordpress Development</Link></li>
+                    <li><Link to="/services/oracle"><img src={iconOracle} className="mega-icon" alt=""/> Oracle Development & Consulting</Link></li>
                   </ul>
                 </div>
 
                 <div className="mega-menu-col">
                   <h4>WEB3 SERVICES</h4>
                   <ul>
-                    <li><Link to="/services/ico">ICO Development</Link></li>
-                    <li><Link to="/services/token">Token Development</Link></li>
-                    <li><Link to="/services/web3">Web3 Development</Link></li>
-                    <li><Link to="/services/dapp">DApp Development</Link></li>
-                    <li><Link to="/services/wallet">Wallet Development</Link></li>
-                    <li><Link to="/services/exchange">Exchange Development</Link></li>
-                    <li><Link to="/services/mlm">MLM Software Development</Link></li>
-                    <li><Link to="/services/dex">Dex Platform</Link></li>
+                    <li><Link to="/services/ico"><img src={iconICO} className="mega-icon" alt=""/> ICO Development</Link></li>
+                    <li><Link to="/services/token"><img src={iconToken} className="mega-icon" alt=""/> Token Development</Link></li>
+                    <li><Link to="/services/web3"><img src={iconWeb3} className="mega-icon" alt=""/> Web3 Development</Link></li>
+                    <li><Link to="/services/dapp"><img src={iconDApp} className="mega-icon" alt=""/> DApp Development</Link></li>
+                    <li><Link to="/services/wallet"><img src={iconWallet} className="mega-icon" alt=""/> Wallet Development</Link></li>
+                    <li><Link to="/services/exchange"><img src={iconExchange} className="mega-icon" alt=""/> Exchange Development</Link></li>
+                    <li><Link to="/services/mlm"><img src={iconMLM} className="mega-icon" alt=""/> MLM Software Development</Link></li>
+                    <li><Link to="/services/dex"><img src={iconDex} className="mega-icon" alt=""/> Dex Platform</Link></li>
                   </ul>
                 </div>
 

@@ -40,7 +40,7 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-const HR_EMAIL = 'hr@whitecirclegroup.com';
+const HR_EMAIL = process.env.EMAIL_USER;
 
 // Helper function to send email notification to HR and confirmation to User
 const sendEmails = async (res, userEmail, userName, hrSubject, hrBody, userSubject, userBody, successMessage) => {

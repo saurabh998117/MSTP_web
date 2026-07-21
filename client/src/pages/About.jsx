@@ -3,15 +3,20 @@ import { CheckCircle2, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Testimonials from '../components/Testimonials';
 import './About.css';
-import missionImg from '../assets/image 661.png';
-import nitinImg from '../assets/image 12.png';
+
+import missionImg from '../assets/aboutus/image 661.png';
+import nitinImg from '../assets/aboutus/nitin.png';
+import nikhilImg from '../assets/aboutus/nikhil.png';
+import dharmendraImg from '../assets/aboutus/dharmendra.png';
+import omImg from '../assets/aboutus/om.png';
+import sauravImg from '../assets/aboutus/saurav.png';
 
 const leadershipTeam = [
   { name: 'Nitin Kumar Tiwari', role: 'Founder', image: nitinImg },
-  { name: 'Nikhil Raj Soni', role: 'Managing Director', image: null },
-  { name: 'Dharmendra Chakrawarti', role: 'Head Designer', image: null },
-  { name: 'Om Hardaha', role: 'Website Designer', image: null },
-  { name: 'Saurabh Namdev', role: 'Technical Relationship Manager', image: null },
+  { name: 'Nikhil Raj Soni', role: 'Managing Director', image: nikhilImg },
+  { name: 'Dharmendra Chakrawarti', role: 'Head Designer', image: dharmendraImg },
+  { name: 'Om Hardaha', role: 'Website Designer', image: omImg },
+  { name: 'Saurabh Namdev', role: 'Technical Relationship Manager', image: sauravImg },
 ];
 
 const About = () => {
@@ -99,7 +104,7 @@ const About = () => {
             <div className="leader-card" style={{margin: '0 auto'}}>
               <div className="leader-image-wrapper">
                 {leadershipTeam[currentLeader].image ? (
-                  <img src={leadershipTeam[currentLeader].image} alt={leadershipTeam[currentLeader].name} className="leader-img" style={{width: '200px', height: '200px'}} />
+                  <img src={leadershipTeam[currentLeader].image} alt={leadershipTeam[currentLeader].name} className="leader-img" style={{width: '200px', height: '200px', objectFit: 'cover', borderRadius: '50%'}} />
                 ) : (
                   <div className="leader-image-placeholder" style={{width: '200px', height: '200px', margin: '0 auto'}}>
                     <span>{leadershipTeam[currentLeader].name.charAt(0)}</span>

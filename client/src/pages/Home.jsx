@@ -1,30 +1,35 @@
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Monitor, Smartphone, Layout, Users, Code, Mail, Lightbulb, UserCheck, ShieldCheck } from 'lucide-react';
 import './Home.css';
 
-// Tech stack images
-import heroImg from '../assets/hero.png';
-import img299 from '../assets/image 299.png';
-import img300 from '../assets/image 300.png';
-import img301 from '../assets/image 301.png';
-import img302 from '../assets/image 302.png';
-import img303 from '../assets/image 303.png';
-import img305 from '../assets/image 305.png';
-import img306 from '../assets/image 306.png';
-import img307 from '../assets/image 307.png';
-import img308 from '../assets/image 308.png';
-import img309 from '../assets/image 309.png';
-import img310 from '../assets/image 310.png';
-import img311 from '../assets/image 311.png';
-import reactImg from '../assets/react.svg';
-import viteImg from '../assets/vite.svg';
+// Hero Slider Images
+import slider1 from '../assets/home/slider1.png';
+import slider2 from '../assets/home/slider2.png';
+import slider3 from '../assets/home/slider3.png';
+import slider4 from '../assets/home/slider4.png';
 
-const techImages = [
-  img299, img300, img301, img302, img303, img305, img306, 
-  img307, img308, img309, img310, img311, reactImg, viteImg
-];
+// Marquee Client logos
+import stfLogo from '../assets/aboutus/stf.png';
+import constaLogo from '../assets/aboutus/constai.png';
+import radissonLogo from '../assets/aboutus/radissen.png';
+import yamahaLogo from '../assets/aboutus/yamaha.png';
+import upgradLogo from '../assets/aboutus/upgrad.png';
+import woomaniyaLogo from '../assets/aboutus/woomaniya.png';
+import madhursaLogo from '../assets/aboutus/madhursa.png';
+
+const heroSlides = [slider1, slider2, slider3, slider4];
 
 const Home = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev === heroSlides.length - 1 ? 0 : prev + 1));
+    }, 4000); // Change slide every 4 seconds
+    return () => clearInterval(timer);
+  }, []);
+
   const services = [
     {
       icon: <Users size={40} />,
@@ -80,19 +85,26 @@ const Home = () => {
     <div className="home">
       {/* Hero Section */}
       <section className="hero">
-        <div className="container hero-container">
-          <div className="hero-content">
-            <h1 className="hero-title">
-              We Turn Ambitious Ideas Into <span>Scalable Solutions.</span>
-            </h1>
-            <p className="hero-subtitle">
-              Building future-ready digital products that drive real business growth.
-            </p>
-            <Link to="/services" className="btn btn-primary">Explore Services</Link>
-          </div>
-          {/* We use the uploaded hero image here */}
-          <div className="hero-graphic" style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-            <img src={heroImg} alt="Hero Illustration" style={{maxWidth: '100%', height: 'auto', maxHeight: '500px', objectFit: 'contain'}} />
+        <div className="hero-container-full">
+          {/* Hero Slider Graphic */}
+          <div className="hero-graphic" style={{position: 'relative', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+            {heroSlides.map((slide, index) => (
+              <img 
+                key={index}
+                src={slide} 
+                alt={`Hero Slider ${index + 1}`} 
+                style={{
+                  width: '100%', 
+                  height: 'auto', 
+                  display: 'block',
+                  opacity: currentSlide === index ? 1 : 0,
+                  transition: 'opacity 0.8s ease-in-out',
+                  position: index === 0 ? 'relative' : 'absolute',
+                  top: 0,
+                  left: 0
+                }} 
+              />
+            ))}
           </div>
         </div>
       </section>
@@ -120,16 +132,14 @@ const Home = () => {
             <div className="clients-track">
               {/* Duplicate the logos so the infinite scroll is seamless */}
               {[...Array(2)].map((_, i) => (
-                <div key={i} className="clients-group">
-                  <div className="client-logo-card">STE</div>
-                  <div className="client-logo-card" style={{color: '#0dcaf0'}}>consta ai</div>
-                  <div className="client-logo-card" style={{fontFamily: 'serif'}}>Radisson <span style={{color: 'blue'}}>BLU</span></div>
-                  <div className="client-logo-card" style={{color: '#0dcaf0'}}>AQUAPLUS</div>
-                  <div className="client-logo-card" style={{fontFamily: 'cursive', color: '#d97706'}}>Madhursa</div>
-                  <div className="client-logo-card" style={{color: '#198754'}}><strong>ST</strong><br/><small style={{fontSize: '10px'}}>SANTOSH TIWARI & ASSOCIATES</small></div>
-                  <div className="client-logo-card" style={{color: 'red'}}>YAMAHA</div>
-                  <div className="client-logo-card" style={{backgroundColor: '#e11d48', color: 'white'}}>upGrad</div>
-                  <div className="client-logo-card" style={{backgroundColor: '#064e3b', color: '#d1fae5'}}>WOOMANIYA</div>
+                <div key={i} className="clients-group" style={{display: 'flex', alignItems: 'center', gap: '3rem'}}>
+                  <div className="client-logo-card"><img src={stfLogo} alt="STF" style={{width: '80%', height: '80%', objectFit: 'contain'}} /></div>
+                  <div className="client-logo-card"><img src={constaLogo} alt="Consta AI" style={{width: '80%', height: '80%', objectFit: 'contain'}} /></div>
+                  <div className="client-logo-card"><img src={radissonLogo} alt="Radisson Blu" style={{width: '80%', height: '80%', objectFit: 'contain'}} /></div>
+                  <div className="client-logo-card"><img src={madhursaLogo} alt="Madhursa" style={{width: '80%', height: '80%', objectFit: 'contain'}} /></div>
+                  <div className="client-logo-card"><img src={yamahaLogo} alt="Yamaha" style={{width: '80%', height: '80%', objectFit: 'contain'}} /></div>
+                  <div className="client-logo-card"><img src={upgradLogo} alt="upGrad" style={{width: '80%', height: '80%', objectFit: 'contain'}} /></div>
+                  <div className="client-logo-card"><img src={woomaniyaLogo} alt="Woomaniya" style={{width: '80%', height: '80%', objectFit: 'contain'}} /></div>
                 </div>
               ))}
             </div>

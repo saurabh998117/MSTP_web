@@ -1,13 +1,13 @@
 // Import images/GIFs
-import ekatrGif from '../assets/एkatr Events.gif';
-import constaGif from '../assets/Consta AI Solutions.gif';
-import aquaGif from '../assets/myaquaplus.gif';
-import satoshiGif from '../assets/STF Gold.gif';
-// Placeholder for missing GIFs
-import placeholderImg from '../assets/hero.png';
+import ekatrGif from '../assets/portfolio/एkatr Events.gif';
+import constaGif from '../assets/portfolio/Consta AI Solutions.gif';
+import aquaGif from '../assets/portfolio/myaquaplus.gif';
+import satoshiGif from '../assets/portfolio/STF Gold.gif';
+import rccmGif from '../assets/portfolio/BCCM Global_A2.gif';
+import samraatGif from '../assets/portfolio/SAMRAAT LOGS_ A1.gif';
 
 // Testimonial placeholder image
-import clientAvatar from '../assets/image 12.png';
+import clientAvatar from '../assets/aboutus/nitin.png';
 
 export const portfolioData = {
   "ekatr": {
@@ -65,7 +65,7 @@ export const portfolioData = {
   "samraat-logs": {
     id: "samraat-logs",
     title: "Samraat Logs - Logistics Platform",
-    image: placeholderImg,
+    image: samraatGif,
     caseStudyTitle: "Case Study: Samraat Logs",
     description: "Samraat Logs is a logistics platform developed to streamline supply chain operations. It provides efficient tracking, shipment management, and seamless coordination between suppliers and customers, ensuring faster and more reliable logistics services.",
     challengeDescription: "Users faced difficulty tracking shipments and managing logistics due to outdated systems and poor UI. The lack of real-time updates and inefficient workflows caused delays. The challenge was to create a modern platform with real-time tracking and simplified logistics management.",
@@ -143,7 +143,7 @@ export const portfolioData = {
   "rccm-global": {
     id: "rccm-global",
     title: "RCCM Global - Education Platform",
-    image: placeholderImg,
+    image: rccmGif,
     caseStudyTitle: "Case Study: RCCM Global",
     description: "RCCM Global is an education platform bridging the gap between students and international opportunities. It provides comprehensive resources for study abroad programs, career guidance, and seamless application processing.",
     challengeDescription: "Students faced overwhelming and scattered information when applying for overseas education. The challenge was to centralize resources and simplify the application journey through a clear, guided interface.",

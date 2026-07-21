@@ -13,6 +13,7 @@ import BookConsultation from './pages/BookConsultation';
 import PrivacyPage from './pages/PrivacyPage';
 import Portfolio from './pages/Portfolio';
 import CaseStudy from './pages/CaseStudy';
+import Testimonials from './components/Testimonials';
 import { servicesData } from './data/servicesData';
 
 function App() {
@@ -43,6 +44,7 @@ function App() {
             <Route path="/success" element={<SuccessPage />} />
             <Route path="/book" element={<BookConsultation />} />
             <Route path="/privacy" element={<PrivacyPage />} />
+            <Route path="/testimonials" element={<div style={{paddingTop: '80px', minHeight: '80vh', backgroundColor: 'var(--bg-primary)'}}><Testimonials /></div>} />
             
             {/* Index route for all services */}
             <Route path="/services" element={
