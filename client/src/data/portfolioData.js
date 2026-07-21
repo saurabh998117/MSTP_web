@@ -9,6 +9,12 @@ import samraatGif from '../assets/portfolio/SAMRAAT LOGS_ A1.gif';
 // Testimonial placeholder image
 import clientAvatar from '../assets/aboutus/nitin.png';
 
+// Tech logos
+import figmaImg from '../assets/tech_logo/figma.png';
+import reactImg from '../assets/tech_logo/react.png';
+import nodeImg from '../assets/tech_logo/node.png';
+import mongoImg from '../assets/tech_logo/mongodb.png';
+
 export const portfolioData = {
   "ekatr": {
     id: "ekatr",
@@ -24,10 +30,10 @@ export const portfolioData = {
       { title: "Low Engagement" }
     ],
     tools: [
-      { name: "Figma" },
-      { name: "React" },
-      { name: "Node.js" },
-      { name: "MongoDB" }
+      { name: "Figma", icon: figmaImg },
+      { name: "React", icon: reactImg },
+      { name: "Node.js", icon: nodeImg },
+      { name: "MongoDB", icon: mongoImg }
     ],
     testimonial: {
       text: "I am extremely satisfied with the delivery of Ekatr. The platform turned out exactly as envisioned. It has significantly improved how we manage and organize events, making the entire experience more seamless and efficient.",
@@ -50,10 +56,10 @@ export const portfolioData = {
       { title: "Low Engagement" }
     ],
     tools: [
-      { name: "Figma" },
-      { name: "React" },
-      { name: "Node.js" },
-      { name: "MongoDB" }
+      { name: "Figma", icon: figmaImg },
+      { name: "React", icon: reactImg },
+      { name: "Node.js", icon: nodeImg },
+      { name: "MongoDB", icon: mongoImg }
     ],
     testimonial: {
       text: "Consta has made a recognized difference for our team. The platform is clean, powerful, and easy to use, helping us simplify complex workflows which reduces our time to do any specific tasks at task.",
@@ -76,10 +82,10 @@ export const portfolioData = {
       { title: "Low Engagement" }
     ],
     tools: [
-      { name: "Figma" },
-      { name: "React" },
-      { name: "Node.js" },
-      { name: "MongoDB" }
+      { name: "Figma", icon: figmaImg },
+      { name: "React", icon: reactImg },
+      { name: "Node.js", icon: nodeImg },
+      { name: "MongoDB", icon: mongoImg }
     ],
     testimonial: {
       text: "Samraat logs has completely transformed our logistics process. Real-time tracking and a clean dashboard have significantly improved our efficiency.",
@@ -102,10 +108,10 @@ export const portfolioData = {
       { title: "Low Engagement" }
     ],
     tools: [
-      { name: "Figma" },
-      { name: "React" },
-      { name: "Node.js" },
-      { name: "MongoDB" }
+      { name: "Figma", icon: figmaImg },
+      { name: "React", icon: reactImg },
+      { name: "Node.js", icon: nodeImg },
+      { name: "MongoDB", icon: mongoImg }
     ],
     testimonial: {
       text: "AquaPlus now perfectly reflects our brand identity. The design is modern, engaging, and has helped improve customer interaction and trust.",
@@ -128,10 +134,10 @@ export const portfolioData = {
       { title: "Low Engagement" }
     ],
     tools: [
-      { name: "Figma" },
-      { name: "React" },
-      { name: "Node.js" },
-      { name: "MongoDB" }
+      { name: "Figma", icon: figmaImg },
+      { name: "React", icon: reactImg },
+      { name: "Node.js", icon: nodeImg },
+      { name: "MongoDB", icon: mongoImg }
     ],
     testimonial: {
       text: "The platform's security and intuitive design make managing digital assets a breeze. Highly recommend for any serious investor.",
@@ -154,10 +160,10 @@ export const portfolioData = {
       { title: "Low Engagement" }
     ],
     tools: [
-      { name: "Figma" },
-      { name: "React" },
-      { name: "Node.js" },
-      { name: "MongoDB" }
+      { name: "Figma", icon: figmaImg },
+      { name: "React", icon: reactImg },
+      { name: "Node.js", icon: nodeImg },
+      { name: "MongoDB", icon: mongoImg }
     ],
     testimonial: {
       text: "RCCM Global's new portal has drastically improved our student engagement and simplified the complex application processes.",

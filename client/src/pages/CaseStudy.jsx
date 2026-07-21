@@ -93,9 +93,13 @@ const CaseStudy = () => {
           <div className="cs-tools-grid">
             {project.tools.map((tool, idx) => (
               <div className="tool-box" key={idx}>
-                <div className="tool-logo-placeholder">
-                  {tool.name.charAt(0)}
-                </div>
+                {tool.icon ? (
+                  <img src={tool.icon} alt={tool.name} style={{width: '70px', height: '70px', objectFit: 'contain', marginBottom: '0.5rem'}} />
+                ) : (
+                  <div className="tool-logo-placeholder">
+                    {tool.name.charAt(0)}
+                  </div>
+                )}
                 <span>{tool.name}</span>
               </div>
             ))}

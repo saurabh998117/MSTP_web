@@ -128,7 +128,7 @@
   height: 100px;
   border-radius: 50%;
   background: var(--bg-primary);
-  border: 2px dashed var(--accent-primary);
+  border: 2px solid var(--accent-primary);
   display: flex;
   align-items: center;
   justify-content: center;

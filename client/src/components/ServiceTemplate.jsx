@@ -1,21 +1,30 @@
 import { useParams, Navigate } from 'react-router-dom';
-import { CheckCircle2, Code2 } from 'lucide-react';
+import { CheckCircle2, Code2, MessageSquare, LayoutList, TestTube, Rocket, Settings } from 'lucide-react';
 import { servicesData } from '../data/servicesData';
 import './ServiceTemplate.css';
 
 // Tech stack images
 import nodeImg from '../assets/tech_logo/node.png';
-import dockerImg from '../assets/services/digital.jpeg'; // Note: Docker icon not available, using placeholder
-import kubernetesImg from '../assets/services/cloud.jpeg'; // Note: K8s icon not available, using placeholder
+import dockerImg from '../assets/tech_logo/docker.png';
+import kubernetesImg from '../assets/tech_logo/kubernatives.png';
 import reactImg from '../assets/tech_logo/react.png';
+import awsImg from '../assets/tech_logo/aws.png';
 
 const globalTechnologies = [
   { name: 'React', icon: reactImg },
   { name: 'NodeJS', icon: nodeImg },
-  { name: 'AWS', icon: kubernetesImg },
+  { name: 'AWS', icon: awsImg },
   { name: 'Docker', icon: dockerImg },
-  { name: 'Kubernetes', icon: kubernetesImg },
-  { name: 'Python', icon: null }
+  { name: 'Kubernetes', icon: kubernetesImg }
+];
+
+const processIcons = [
+  <MessageSquare size={48} strokeWidth={1.5} />,
+  <LayoutList size={48} strokeWidth={1.5} />,
+  <Code2 size={48} strokeWidth={1.5} />,
+  <TestTube size={48} strokeWidth={1.5} />,
+  <Rocket size={48} strokeWidth={1.5} />,
+  <Settings size={48} strokeWidth={1.5} />
 ];
 
 const ServiceTemplate = () => {
@@ -73,8 +82,8 @@ const ServiceTemplate = () => {
           <div className="process-cycle">
             {service.processSteps.map((step, idx) => (
               <div className="process-step" key={idx}>
-                <div className="process-circle">
-                  {idx + 1}
+                <div className="process-circle" style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
+                  {processIcons[idx % processIcons.length]}
                 </div>
                 <span>{step}</span>
               </div>
@@ -90,7 +99,7 @@ const ServiceTemplate = () => {
           <div className="tech-grid">
             {globalTechnologies.map((tech, idx) => (
               <div className="tech-item" key={idx}>
-                {tech.icon && <img src={tech.icon} alt={tech.name} style={{width: '24px', height: '24px', objectFit: 'contain'}} />}
+                {tech.icon && <img src={tech.icon} alt={tech.name} style={{width: '36px', height: '36px', objectFit: 'contain'}} />}
                 {tech.name}
               </div>
             ))}
