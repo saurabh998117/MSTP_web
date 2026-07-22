@@ -1,13 +1,15 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Monitor, Smartphone, Layout, Users, Code, Mail, Lightbulb, UserCheck, ShieldCheck } from 'lucide-react';
+import { Monitor, Smartphone, Layout, Users, Code, Mail, Lightbulb, UserCheck, ShieldCheck, ChevronLeft, ChevronRight } from 'lucide-react';
 import './Home.css';
 
-// Hero Slider Images
+// Hero Slider Assets
+import heroVideo from '../assets/home/Hero Section.mp4';
 import slider1 from '../assets/home/slider1.png';
 import slider2 from '../assets/home/slider2.png';
 import slider3 from '../assets/home/slider3.png';
 import slider4 from '../assets/home/slider4.png';
+import slider5 from '../assets/home/slider5.gif';
 
 // Marquee Client logos
 import stfLogo from '../assets/aboutus/stf.png';
@@ -18,17 +20,25 @@ import upgradLogo from '../assets/aboutus/upgrad.png';
 import woomaniyaLogo from '../assets/aboutus/woomaniya.png';
 import madhursaLogo from '../assets/aboutus/madhursa.png';
 
-const heroSlides = [slider1, slider2, slider3, slider4];
+const heroSlides = [
+  { type: 'video', src: heroVideo },
+  { type: 'image', src: slider1 },
+  { type: 'image', src: slider2 },
+  { type: 'image', src: slider3 },
+  { type: 'image', src: slider4 },
+  { type: 'image', src: slider5 }
+];
 
 const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev === heroSlides.length - 1 ? 0 : prev + 1));
-    }, 4000); // Change slide every 4 seconds
-    return () => clearInterval(timer);
-  }, []);
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev === heroSlides.length - 1 ? 0 : prev + 1));
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev === 0 ? heroSlides.length - 1 : prev - 1));
+  };
 
   const services = [
     {
@@ -88,23 +98,69 @@ const Home = () => {
         <div className="hero-container-full">
           {/* Hero Slider Graphic */}
           <div className="hero-graphic" style={{position: 'relative', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+            
+            {/* Left / Right Navigation Arrows */}
+            <button className="slider-arrow arrow-left" onClick={prevSlide} aria-label="Previous Slide">
+              <ChevronLeft size={30} />
+            </button>
+            <button className="slider-arrow arrow-right" onClick={nextSlide} aria-label="Next Slide">
+              <ChevronRight size={30} />
+            </button>
+
+            {/* Slides Rendering (Video & Images) */}
             {heroSlides.map((slide, index) => (
-              <img 
-                key={index}
-                src={slide} 
-                alt={`Hero Slider ${index + 1}`} 
-                style={{
-                  width: '100%', 
-                  height: 'auto', 
-                  display: 'block',
-                  opacity: currentSlide === index ? 1 : 0,
-                  transition: 'opacity 0.8s ease-in-out',
-                  position: index === 0 ? 'relative' : 'absolute',
-                  top: 0,
-                  left: 0
-                }} 
-              />
+              slide.type === 'video' ? (
+                <video 
+                  key={index}
+                  src={slide.src} 
+                  autoPlay 
+                  muted 
+                  loop 
+                  playsInline 
+                  style={{
+                    width: '100%', 
+                    height: 'auto', 
+                    maxHeight: '80vh',
+                    objectFit: 'cover',
+                    display: 'block',
+                    opacity: currentSlide === index ? 1 : 0,
+                    transition: 'opacity 0.8s ease-in-out',
+                    position: index === 0 ? 'relative' : 'absolute',
+                    top: 0,
+                    left: 0
+                  }} 
+                />
+              ) : (
+                <img 
+                  key={index}
+                  src={slide.src} 
+                  alt={`Hero Slide ${index + 1}`} 
+                  style={{
+                    width: '100%', 
+                    height: 'auto', 
+                    display: 'block',
+                    opacity: currentSlide === index ? 1 : 0,
+                    transition: 'opacity 0.8s ease-in-out',
+                    position: index === 0 ? 'relative' : 'absolute',
+                    top: 0,
+                    left: 0
+                  }} 
+                />
+              )
             ))}
+
+            {/* Navigation Dots */}
+            <div className="slider-dots">
+              {heroSlides.map((_, idx) => (
+                <button 
+                  key={idx} 
+                  className={`slider-dot ${currentSlide === idx ? 'active' : ''}`} 
+                  onClick={() => setCurrentSlide(idx)}
+                  aria-label={`Go to slide ${idx + 1}`}
+                />
+              ))}
+            </div>
+
           </div>
         </div>
       </section>
@@ -121,28 +177,6 @@ const Home = () => {
                 <p className="service-desc">{service.description}</p>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Clients Banner */}
-      <section className="clients-banner">
-        <div className="container" style={{ overflow: 'hidden' }}>
-          <div className="clients-marquee">
-            <div className="clients-track">
-              {/* Duplicate the logos so the infinite scroll is seamless */}
-              {[...Array(2)].map((_, i) => (
-                <div key={i} className="clients-group" style={{display: 'flex', alignItems: 'center', gap: '3rem'}}>
-                  <div className="client-logo-card"><img src={stfLogo} alt="STF" style={{width: '80%', height: '80%', objectFit: 'contain'}} /></div>
-                  <div className="client-logo-card"><img src={constaLogo} alt="Consta AI" style={{width: '80%', height: '80%', objectFit: 'contain'}} /></div>
-                  <div className="client-logo-card"><img src={radissonLogo} alt="Radisson Blu" style={{width: '80%', height: '80%', objectFit: 'contain'}} /></div>
-                  <div className="client-logo-card"><img src={madhursaLogo} alt="Madhursa" style={{width: '80%', height: '80%', objectFit: 'contain'}} /></div>
-                  <div className="client-logo-card"><img src={yamahaLogo} alt="Yamaha" style={{width: '80%', height: '80%', objectFit: 'contain'}} /></div>
-                  <div className="client-logo-card"><img src={upgradLogo} alt="upGrad" style={{width: '80%', height: '80%', objectFit: 'contain'}} /></div>
-                  <div className="client-logo-card"><img src={woomaniyaLogo} alt="Woomaniya" style={{width: '80%', height: '80%', objectFit: 'contain'}} /></div>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
       </section>

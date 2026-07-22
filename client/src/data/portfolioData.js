@@ -7,7 +7,7 @@ import rccmGif from '../assets/portfolio/BCCM Global_A2.gif';
 import samraatGif from '../assets/portfolio/SAMRAAT LOGS_ A1.gif';
 
 // Testimonial placeholder image
-import clientAvatar from '../assets/aboutus/nitin.png';
+import clientAvatar from '../assets/contactus/user.png';
 
 // Tech logos
 import figmaImg from '../assets/tech_logo/figma.png';

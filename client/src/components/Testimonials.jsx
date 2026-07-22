@@ -2,9 +2,8 @@ import { useState } from 'react';
 import { ChevronRight, Star, MessageSquare, Globe, Users } from 'lucide-react';
 import './Testimonials.css';
 
-// Using existing avatars from aboutus as placeholders
-import avatar1 from '../assets/aboutus/saurav.png';
-import avatar2 from '../assets/aboutus/nitin.png';
+// Default user profile avatar
+import defaultUserImg from '../assets/contactus/user.png';
 
 const Testimonials = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -16,7 +15,7 @@ const Testimonials = () => {
       name: 'Ashish Maurya',
       role: 'Event Organizer',
       rating: 5,
-      avatar: avatar1
+      avatar: defaultUserImg
     },
     {
       id: 2,
@@ -24,7 +23,7 @@ const Testimonials = () => {
       name: 'Sanjay',
       role: 'Public Speaker',
       rating: 4,
-      avatar: avatar2
+      avatar: defaultUserImg
     }
   ];
 
@@ -53,7 +52,7 @@ const Testimonials = () => {
               </p>
               
               <div className="testimonial-author-row">
-                <img src={currentTestimonial.avatar} alt={currentTestimonial.name} className="author-avatar-img" />
+                <img src={currentTestimonial.avatar || defaultUserImg} alt={currentTestimonial.name} className="author-avatar-img" />
                 <div className="author-details">
                   <h4>{currentTestimonial.name}</h4>
                   <span>{currentTestimonial.role}</span>

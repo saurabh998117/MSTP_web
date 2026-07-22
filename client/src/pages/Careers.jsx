@@ -194,7 +194,7 @@ const Careers = () => {
                     <button className="view-details-btn" onClick={() => toggleJob(job.id)}>
                       View details <ArrowRight size={16} style={{marginLeft: '4px'}}/>
                     </button>
-                    <Link to="/apply" className="apply-now-btn-small">
+                    <Link to="/apply" state={{ job }} className="apply-now-btn-small">
                       Apply Now <ArrowRight size={16} style={{marginLeft: '4px'}}/>
                     </Link>
                   </div>
@@ -268,7 +268,7 @@ const Careers = () => {
 
                       <div className="job-action-buttons">
                         <button className="btn btn-outline" onClick={() => setExpandedJobId(null)}>Cancel</button>
-                        <Link to="/apply" className="btn btn-primary" style={{textDecoration: 'none'}}>Apply</Link>
+                        <Link to="/apply" state={{ job }} className="btn btn-primary" style={{textDecoration: 'none'}}>Apply</Link>
                       </div>
                     </div>
                   </div>

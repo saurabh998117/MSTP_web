@@ -111,21 +111,95 @@ app.post('/api/book', async (req, res) => {
   await sendEmails(res, email, name, hrSubject, hrBody, userSubject, userBody, 'Your consultation has been booked successfully! We will contact you soon.');
 });
 
+// Application Schema
+const applicationSchema = new mongoose.Schema({
+  jobTitle: String,
+  jobId: String,
+  firstName: String,
+  lastName: String,
+  email: String,
+  countryCode: String,
+  phone: String,
+  country: String,
+  city: String,
+  resumeName: String,
+  coverLetter: String,
+  githubUrl: String,
+  linkedinUrl: String,
+  appliedAt: { type: Date, default: Date.now }
+});
+
+const Application = mongoose.model("Application", applicationSchema);
+
 // 3. Careers Apply Endpoint
 app.post('/api/apply', async (req, res) => {
-  const { name, email, phone, position, experience, portfolio, whyHire } = req.body;
+  const { 
+    jobTitle, jobId, firstName, lastName, email, 
+    countryCode, phone, country, city, 
+    resumeName, coverLetter, githubUrl, linkedinUrl 
+  } = req.body;
 
-  if (!name || !email || !position) {
-    return res.status(400).json({ error: 'Name, email, and position are required.' });
+  if (!firstName || !lastName || !email || !phone || !country || !city || !jobTitle) {
+    return res.status(400).json({ error: 'First Name, Last Name, Email, Phone, Country, City, and Job Title are required.' });
   }
 
-  const hrSubject = `New Job Application: ${position} by ${name}`;
-  const hrBody = `New application received from Careers page.\n\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\nPosition: ${position}\nExperience: ${experience} years\nPortfolio/LinkedIn: ${portfolio || 'N/A'}\nWhy hire: ${whyHire || 'N/A'}`;
-  
-  const userSubject = `Application Received: ${position} - WhiteCircle Group`;
-  const userBody = `Hi ${name},\n\nThank you for applying for the ${position} position at WhiteCircle Group. We have received your application and our HR team will review it. If your profile matches our requirements, we will reach out for the next steps.\n\nBest regards,\nWhiteCircle Group HR Team`;
+  try {
+    // 1. Save to Database
+    const newApp = new Application({
+      jobTitle,
+      jobId,
+      firstName,
+      lastName,
+      email,
+      countryCode: countryCode || '+91',
+      phone,
+      country,
+      city,
+      resumeName: resumeName || 'Resume.pdf',
+      coverLetter,
+      githubUrl,
+      linkedinUrl
+    });
 
-  await sendEmails(res, email, name, hrSubject, hrBody, userSubject, userBody, 'Application submitted successfully! Please check your email.');
+    await newApp.save();
+    console.log("Job Application saved to DB:", firstName, lastName, jobTitle);
+
+    // 2. Prepare Emails
+    const candidateName = `${firstName} ${lastName}`;
+    const fullPhone = `${countryCode || '+91'} ${phone}`;
+
+    const hrSubject = `New Job Application: ${jobTitle} from ${candidateName}`;
+    const hrBody = `You have received a new job application.\n\n` +
+      `Position: ${jobTitle} (ID: ${jobId || 'N/A'})\n` +
+      `Candidate Name: ${candidateName}\n` +
+      `Email: ${email}\n` +
+      `Phone: ${fullPhone}\n` +
+      `Location: ${city}, ${country}\n` +
+      `Resume File: ${resumeName || 'Attached/Uploaded'}\n` +
+      `GitHub: ${githubUrl || 'N/A'}\n` +
+      `LinkedIn: ${linkedinUrl || 'N/A'}\n` +
+      `Cover Letter: ${coverLetter || 'N/A'}\n\n` +
+      `Applied Date: ${new Date().toLocaleString()}`;
+
+    const userSubject = `Application Received: ${jobTitle} - MAATRSHRI Group`;
+    const userBody = `Dear ${candidateName},\n\n` +
+      `Thank you for applying for the ${jobTitle} position at MAATRSHRI Group.\n\n` +
+      `We have successfully received your application. Our talent acquisition team will carefully review your qualifications and contact you if your profile matches our requirements.\n\n` +
+      `Application Summary:\n` +
+      `- Position: ${jobTitle}\n` +
+      `- Name: ${candidateName}\n` +
+      `- Email: ${email}\n` +
+      `- Contact: ${fullPhone}\n` +
+      `- Location: ${city}, ${country}\n\n` +
+      `Best regards,\n` +
+      `HR & Recruitment Team\n` +
+      `MAATRSHRI Group`;
+
+    await sendEmails(res, email, candidateName, hrSubject, hrBody, userSubject, userBody, 'Application submitted successfully! A confirmation email has been sent.');
+  } catch (error) {
+    console.error("Application error:", error);
+    res.status(500).json({ error: 'Failed to process application. Please try again later.' });
+  }
 });
 
 // ✅ SERVE FRONTEND (IMPORTANT)

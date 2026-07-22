@@ -3,6 +3,7 @@ import { MapPin, Mail, Phone } from 'lucide-react';
 import './Footer.css';
 import instaIcon from '../assets/home/insta.png';
 import linkedinIcon from '../assets/home/linkdin.png';
+import whatsappIcon from '../assets/home/whatsapp.png';
 
 const Footer = () => {
   return (
@@ -19,6 +20,9 @@ const Footer = () => {
             </a>
             <a href="#" aria-label="LinkedIn">
               <img src={linkedinIcon} alt="LinkedIn" style={{width: '32px', height: '32px', objectFit: 'contain'}} />
+            </a>
+            <a href="https://wa.me/917898769872" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+              <img src={whatsappIcon} alt="WhatsApp" style={{width: '32px', height: '32px', objectFit: 'contain'}} />
             </a>
           </div>
         </div>

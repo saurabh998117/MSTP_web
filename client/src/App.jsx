@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -16,6 +16,17 @@ import CaseStudy from './pages/CaseStudy';
 import Testimonials from './components/Testimonials';
 import { servicesData } from './data/servicesData';
 
+// Component to scroll to top automatically on route navigation
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  }, [pathname]);
+
+  return null;
+};
+
 function App() {
   const [theme, setTheme] = useState('light');
 
@@ -29,6 +40,7 @@ function App() {
 
   return (
     <Router>
+      <ScrollToTop />
       <div className="app-container">
         <Navbar theme={theme} toggleTheme={toggleTheme} />
         <main>
