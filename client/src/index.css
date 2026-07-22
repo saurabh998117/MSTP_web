@@ -16,8 +16,8 @@
   --glow-shadow: 0 0 15px rgba(215, 184, 137, 0.4);
   
   /* Layout */
-  --max-width: 1200px;
-  --header-height: 80px;
+  --max-width: 1550px;
+  --header-height: 90px;
   
   /* Border */
   --border-color: rgba(242, 237, 226, 0.1);
@@ -76,7 +76,7 @@ img {
   width: 100%;
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 2.5rem;
 }
 
 .section {

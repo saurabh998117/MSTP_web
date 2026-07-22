@@ -1,6 +1,10 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Monitor, Smartphone, Layout, Users, Code, Mail, Lightbulb, UserCheck, ShieldCheck, ChevronLeft, ChevronRight } from 'lucide-react';
+import { 
+  Monitor, Smartphone, Layout, Users, Code, Mail, Lightbulb, 
+  UserCheck, ShieldCheck, ChevronLeft, ChevronRight,
+  Bot, Cloud, Code2, LayoutGrid, MonitorCheck
+} from 'lucide-react';
 import './Home.css';
 
 // Hero Slider Assets
@@ -29,8 +33,37 @@ const heroSlides = [
   { type: 'image', src: slider5 }
 ];
 
+const overlayServices = [
+  {
+    title: 'AI SOLUTIONS',
+    icon: <Bot size={32} />,
+    link: '/services/ai-services'
+  },
+  {
+    title: 'DEVOPS & CLOUD SERVICES',
+    icon: <Cloud size={32} />,
+    link: '/services/cloud-hosting'
+  },
+  {
+    title: 'APPLICATION DEVELOPMENT',
+    icon: <Code2 size={32} />,
+    link: '/services/software-development'
+  },
+  {
+    title: 'PROJECT MANAGEMENT',
+    icon: <LayoutGrid size={32} />,
+    link: '/services/it-services'
+  },
+  {
+    title: 'UI/UX DESIGN',
+    icon: <MonitorCheck size={32} />,
+    link: '/services/web-development'
+  }
+];
+
 const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [activeOverlay, setActiveOverlay] = useState(0);
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev === heroSlides.length - 1 ? 0 : prev + 1));
@@ -148,6 +181,21 @@ const Home = () => {
                 />
               )
             ))}
+
+            {/* Hero Services Overlay Cards (matching reference design) */}
+            <div className="hero-overlay-container">
+              {overlayServices.map((service, idx) => (
+                <Link 
+                  to={service.link} 
+                  key={idx} 
+                  className={`hero-overlay-card ${activeOverlay === idx ? 'active' : ''}`} 
+                  onClick={() => setActiveOverlay(idx)}
+                >
+                  <div className="overlay-icon-box">{service.icon}</div>
+                  <span className="overlay-title">{service.title}</span>
+                </Link>
+              ))}
+            </div>
 
             {/* Navigation Dots */}
             <div className="slider-dots">

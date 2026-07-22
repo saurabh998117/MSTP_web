@@ -98,6 +98,71 @@
   border-radius: 10px;
 }
 
+/* Hero Services Overlay Cards (matching reference design) */
+.hero-overlay-container {
+  position: absolute;
+  bottom: 45px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 92%;
+  max-width: 1250px;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  z-index: 12;
+  flex-wrap: wrap;
+}
+
+.hero-overlay-card {
+  flex: 1;
+  min-width: 160px;
+  max-width: 220px;
+  background: rgba(10, 16, 28, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  padding: 1.3rem 0.8rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem;
+  text-decoration: none;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.hero-overlay-card:hover,
+.hero-overlay-card.active {
+  background: rgba(23, 37, 68, 0.9);
+  border-color: #38bdf8;
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(56, 189, 248, 0.35);
+}
+
+.overlay-icon-box {
+  color: #38bdf8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.hero-overlay-card:hover .overlay-icon-box {
+  transform: scale(1.1);
+}
+
+.overlay-title {
+  color: #ffffff;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: 0.5px;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
 .cube-wrapper {
   position: relative;
   width: 200px;
@@ -288,8 +353,63 @@
 }
 
 @media (max-width: 992px) {
+  .hero-graphic {
+    flex-direction: column;
+  }
+
+  .hero-overlay-container {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    transform: none;
+    width: 100%;
+    margin-top: 1.2rem;
+    padding: 0.5rem 1rem;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+  }
+
+  .hero-overlay-card {
+    flex: 0 0 160px;
+    min-width: 150px;
+    scroll-snap-align: start;
+    padding: 1rem 0.6rem;
+  }
+
   .reasons-grid {
     grid-template-columns: 1fr;
     gap: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .slider-arrow {
+    width: 38px;
+    height: 38px;
+  }
+
+  .arrow-left {
+    left: 8px;
+  }
+
+  .arrow-right {
+    right: 8px;
+  }
+
+  .slider-dots {
+    bottom: 10px;
+    padding: 4px 10px;
+  }
+
+  .slider-dot {
+    width: 8px;
+    height: 8px;
+  }
+
+  .slider-dot.active {
+    width: 20px;
   }
 }

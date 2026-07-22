@@ -1,5 +1,6 @@
+import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Sun, Moon } from 'lucide-react';
+import { Sun, Moon, Menu, X } from 'lucide-react';
 import './Navbar.css';
 
 // Import 25 icons mapped to Services
@@ -34,25 +35,28 @@ import iconDex from '../assets/services/dex 2.png';
 
 const Navbar = ({ theme, toggleTheme }) => {
   const location = useLocation();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const closeMobileMenu = () => setIsMobileMenuOpen(false);
 
   return (
     <nav className="navbar">
       <div className="container nav-container">
         <div className="logo">
-          <Link to="/">
+          <Link to="/" onClick={closeMobileMenu}>
             <img src="/logo.jpeg" alt="MAATRSHRI Logo" className="logo-img" />
           </Link>
         </div>
         
-        <ul className="nav-links">
+        <ul className={`nav-links ${isMobileMenuOpen ? 'mobile-open' : ''}`}>
           <li>
-            <Link to="/" className={location.pathname === '/' ? 'active' : ''}>Home</Link>
+            <Link to="/" className={location.pathname === '/' ? 'active' : ''} onClick={closeMobileMenu}>Home</Link>
           </li>
           <li>
-            <Link to="/about" className={location.pathname === '/about' ? 'active' : ''}>About Us</Link>
+            <Link to="/about" className={location.pathname === '/about' ? 'active' : ''} onClick={closeMobileMenu}>About Us</Link>
           </li>
           <li className="nav-item-dropdown">
-            <Link to="/services" className={location.pathname === '/services' ? 'active' : ''}>Services</Link>
+            <Link to="/services" className={location.pathname === '/services' ? 'active' : ''} onClick={closeMobileMenu}>Services</Link>
             <div className="mega-menu">
               <div className="mega-menu-grid">
                 
@@ -109,18 +113,25 @@ const Navbar = ({ theme, toggleTheme }) => {
             </div>
           </li>
           <li>
-            <Link to="/portfolio" className={location.pathname === '/portfolio' ? 'active' : ''}>Portfolio</Link>
+            <Link to="/portfolio" className={location.pathname === '/portfolio' ? 'active' : ''} onClick={closeMobileMenu}>Portfolio</Link>
           </li>
           <li>
-            <Link to="/careers" className={location.pathname === '/careers' ? 'active' : ''}>Careers</Link>
+            <Link to="/careers" className={location.pathname === '/careers' ? 'active' : ''} onClick={closeMobileMenu}>Careers</Link>
           </li>
         </ul>
 
         <div className="nav-action">
           <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
-            {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
+            {theme === 'light' ? <Moon size={24} /> : <Sun size={24} />}
           </button>
-          <Link to="/contact" className="btn btn-outline">Contact us</Link>
+          <Link to="/contact" className="btn btn-outline" onClick={closeMobileMenu}>Contact us</Link>
+          <button 
+            className="mobile-toggle-btn" 
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} 
+            aria-label="Toggle mobile menu"
+          >
+            {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+          </button>
         </div>
       </div>
     </nav>
