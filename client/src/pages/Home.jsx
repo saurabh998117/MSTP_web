@@ -130,59 +130,54 @@ const Home = () => {
       <section className="hero">
         <div className="hero-container-full">
           {/* Hero Slider Graphic */}
-          <div className="hero-graphic" style={{position: 'relative', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+          <div className="hero-graphic">
             
-            {/* Left / Right Navigation Arrows */}
-            <button className="slider-arrow arrow-left" onClick={prevSlide} aria-label="Previous Slide">
-              <ChevronLeft size={30} />
-            </button>
-            <button className="slider-arrow arrow-right" onClick={nextSlide} aria-label="Next Slide">
-              <ChevronRight size={30} />
-            </button>
+            {/* Slider Media Wrapper */}
+            <div className="hero-slider-wrapper">
+              {/* Left / Right Navigation Arrows */}
+              <button className="slider-arrow arrow-left" onClick={prevSlide} aria-label="Previous Slide">
+                <ChevronLeft size={28} />
+              </button>
+              <button className="slider-arrow arrow-right" onClick={nextSlide} aria-label="Next Slide">
+                <ChevronRight size={28} />
+              </button>
 
-            {/* Slides Rendering (Video & Images) */}
-            {heroSlides.map((slide, index) => (
-              slide.type === 'video' ? (
-                <video 
-                  key={index}
-                  src={slide.src} 
-                  autoPlay 
-                  muted 
-                  loop 
-                  playsInline 
-                  style={{
-                    width: '100%', 
-                    height: 'auto', 
-                    maxHeight: '80vh',
-                    objectFit: 'cover',
-                    display: 'block',
-                    opacity: currentSlide === index ? 1 : 0,
-                    transition: 'opacity 0.8s ease-in-out',
-                    position: index === 0 ? 'relative' : 'absolute',
-                    top: 0,
-                    left: 0
-                  }} 
-                />
-              ) : (
-                <img 
-                  key={index}
-                  src={slide.src} 
-                  alt={`Hero Slide ${index + 1}`} 
-                  style={{
-                    width: '100%', 
-                    height: 'auto', 
-                    display: 'block',
-                    opacity: currentSlide === index ? 1 : 0,
-                    transition: 'opacity 0.8s ease-in-out',
-                    position: index === 0 ? 'relative' : 'absolute',
-                    top: 0,
-                    left: 0
-                  }} 
-                />
-              )
-            ))}
+              {/* Slides Rendering (Video & Images) */}
+              {heroSlides.map((slide, index) => (
+                slide.type === 'video' ? (
+                  <video 
+                    key={index}
+                    src={slide.src} 
+                    autoPlay 
+                    muted 
+                    loop 
+                    playsInline 
+                    className={`hero-media-item ${currentSlide === index ? 'active' : ''}`}
+                  />
+                ) : (
+                  <img 
+                    key={index}
+                    src={slide.src} 
+                    alt={`Hero Slide ${index + 1}`} 
+                    className={`hero-media-item ${currentSlide === index ? 'active' : ''}`}
+                  />
+                )
+              ))}
 
-            {/* Hero Services Overlay Cards (matching reference design) */}
+              {/* Navigation Dots */}
+              <div className="slider-dots">
+                {heroSlides.map((_, idx) => (
+                  <button 
+                    key={idx} 
+                    className={`slider-dot ${currentSlide === idx ? 'active' : ''}`} 
+                    onClick={() => setCurrentSlide(idx)}
+                    aria-label={`Go to slide ${idx + 1}`}
+                  />
+                ))}
+              </div>
+            </div>
+
+            {/* Hero Services Cards Below Slider */}
             <div className="hero-overlay-container">
               {overlayServices.map((service, idx) => (
                 <Link 
@@ -194,18 +189,6 @@ const Home = () => {
                   <div className="overlay-icon-box">{service.icon}</div>
                   <span className="overlay-title">{service.title}</span>
                 </Link>
-              ))}
-            </div>
-
-            {/* Navigation Dots */}
-            <div className="slider-dots">
-              {heroSlides.map((_, idx) => (
-                <button 
-                  key={idx} 
-                  className={`slider-dot ${currentSlide === idx ? 'active' : ''}`} 
-                  onClick={() => setCurrentSlide(idx)}
-                  aria-label={`Go to slide ${idx + 1}`}
-                />
               ))}
             </div>
 
