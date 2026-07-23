@@ -138,13 +138,11 @@
 }
 
 .mega-icon {
-  width: 20px;
-  height: 20px;
+  width: 22px;
+  height: 22px;
   object-fit: contain;
-  filter: brightness(0) saturate(100%); /* To match screenshot icon colors which are dark/grey */
-}
-[data-theme='dark'] .mega-icon {
-  filter: brightness(0) saturate(100%) invert(1); /* Invert to white in dark mode */
+  border-radius: 4px;
+  flex-shrink: 0;
 }
 
 .mega-menu-col li a:hover {

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ChevronRight, Star, MessageSquare, Globe, Users } from 'lucide-react';
 import './Testimonials.css';
 
@@ -8,24 +8,23 @@ import defaultUserImg from '../assets/contactus/user.png';
 const Testimonials = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const testimonials = [
-    {
-      id: 1,
-      text: 'The website exceeded my expectations. Loved the minimal and clean look. Done within the deadline and communication was excellent. Highly recommended.',
-      name: 'Ashish Maurya',
-      role: 'Event Organizer',
-      rating: 5,
-      avatar: defaultUserImg
-    },
-    {
-      id: 2,
-      text: 'Outstanding job by the team ! Everything was smooth and well-coordinated. Truly a memorable experience.',
-      name: 'Sanjay',
-      role: 'Public Speaker',
-      rating: 4,
-      avatar: defaultUserImg
-    }
-  ];
+  const [testimonials, setTestimonials] = useState([{
+    _id: 1,
+    text: 'Loading testimonials...',
+    name: 'Loading...',
+    role: '',
+    rating: 5,
+    avatar: defaultUserImg
+  }]);
+
+  useEffect(() => {
+    fetch('http://localhost:5000/api/testimonials')
+      .then(res => res.json())
+      .then(data => {
+        if (data && data.length > 0) setTestimonials(data);
+      })
+      .catch(console.error);
+  }, []);
 
   const handleNext = () => {
     setCurrentIndex((prevIndex) => (prevIndex === testimonials.length - 1 ? 0 : prevIndex + 1));

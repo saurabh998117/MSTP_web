@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { MapPin, Mail, Phone } from 'lucide-react';
 import './Footer.css';
@@ -6,6 +7,14 @@ import linkedinIcon from '../assets/home/linkdin.png';
 import whatsappIcon from '../assets/home/whatsapp.png';
 
 const Footer = () => {
+  const [settings, setSettings] = useState({});
+
+  useEffect(() => {
+    fetch('http://localhost:5000/api/settings')
+      .then(res => res.json())
+      .then(data => setSettings(data))
+      .catch(console.error);
+  }, []);
   return (
     <footer className="footer">
       <div className="container footer-container">
@@ -15,13 +24,13 @@ const Footer = () => {
             We are a trusted technology and business solutions company that helps organizations grow in the digital era through IT Services, IT Consulting, Staffing, Payroll, Outsourcing, and Digital Marketing solutions. The company also works across B2B markets and focuses on innovation and software development to meet global business needs.
           </p>
           <div className="social-links" style={{display: 'flex', gap: '1rem', marginTop: '1rem'}}>
-            <a href="#" aria-label="Instagram">
+            <a href={settings?.socialLinks?.instagram || "https://www.instagram.com/_whitecirclegroup?igsh=dWljbTVoMnFlcXRq"} target="_blank" rel="noopener noreferrer" aria-label="Instagram">
               <img src={instaIcon} alt="Instagram" style={{width: '32px', height: '32px', objectFit: 'contain'}} />
             </a>
-            <a href="#" aria-label="LinkedIn">
+            <a href={settings?.socialLinks?.linkedin || "https://www.linkedin.com/company/whitecircle-group/"} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
               <img src={linkedinIcon} alt="LinkedIn" style={{width: '32px', height: '32px', objectFit: 'contain'}} />
             </a>
-            <a href="https://wa.me/917898769872" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+            <a href={settings?.socialLinks?.whatsapp || "https://wa.me/message/4BLHTNLKXWDKG1"} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
               <img src={whatsappIcon} alt="WhatsApp" style={{width: '32px', height: '32px', objectFit: 'contain'}} />
             </a>
           </div>
@@ -45,15 +54,15 @@ const Footer = () => {
           <ul className="contact-info">
             <li>
               <MapPin className="contact-icon" size={20} />
-              <span>Headquarter: Swastik Galaxy A Block, 1st Floor, Near Indra Square, Shahdol, MP</span>
+              <span>{settings?.contactAddress || 'Headquarter: Swastik Galaxy A Block, 1st Floor, Near Indra Square, Shahdol, MP'}</span>
             </li>
             <li>
               <Mail className="contact-icon" size={20} />
-              <span>hr@maatrshrigroup.in</span>
+              <span>{settings?.contactEmail || 'hr@maatrshrigroup.in'}</span>
             </li>
             <li>
               <Phone className="contact-icon" size={20} />
-              <span>+91 78987 69872</span>
+              <span>{settings?.contactPhone || '+91 78987 69872'}</span>
             </li>
           </ul>
         </div>

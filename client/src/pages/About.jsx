@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { CheckCircle2, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Testimonials from '../components/Testimonials';
@@ -11,16 +11,37 @@ import dharmendraImg from '../assets/aboutus/dharmendra.png';
 import omImg from '../assets/aboutus/om.png';
 import sauravImg from '../assets/aboutus/saurav.png';
 
-const leadershipTeam = [
-  { name: 'Nitin Kumar Tiwari', role: 'Founder', image: nitinImg },
-  { name: 'Nikhil Raj Soni', role: 'Managing Director', image: nikhilImg },
-  { name: 'Dharmendra Chakrawarti', role: 'Head Designer', image: dharmendraImg },
-  { name: 'Om Hardaha', role: 'Website Designer', image: omImg },
-  { name: 'Saurabh Namdev', role: 'Technical Relationship Manager', image: sauravImg },
-];
+const localTeamImages = {
+  'Nitin Kumar Tiwari': nitinImg,
+  'Nikhil Raj Soni': nikhilImg,
+  'Dharmendra Chakrawarti': dharmendraImg,
+  'Om Hardaha': omImg,
+  'Saurabh Namdev': sauravImg
+};
 
 const About = () => {
   const [currentLeader, setCurrentLeader] = useState(0);
+  const [leadershipTeam, setLeadershipTeam] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:5000/api/team')
+      .then(res => res.json())
+      .then(data => {
+        if (data && data.length > 0) {
+          setLeadershipTeam(data);
+        } else {
+          // Fallback if empty
+          setLeadershipTeam([
+            { name: 'Nitin Kumar Tiwari', role: 'Founder', image: nitinImg },
+            { name: 'Nikhil Raj Soni', role: 'Managing Director', image: nikhilImg },
+            { name: 'Dharmendra Chakrawarti', role: 'Head Designer', image: dharmendraImg },
+            { name: 'Om Hardaha', role: 'Website Designer', image: omImg },
+            { name: 'Saurabh Namdev', role: 'Technical Relationship Manager', image: sauravImg }
+          ]);
+        }
+      })
+      .catch(console.error);
+  }, []);
 
   const nextLeader = () => {
     setCurrentLeader((prev) => (prev === leadershipTeam.length - 1 ? 0 : prev + 1));
@@ -29,6 +50,8 @@ const About = () => {
   const prevLeader = () => {
     setCurrentLeader((prev) => (prev === 0 ? leadershipTeam.length - 1 : prev - 1));
   };
+
+  if (leadershipTeam.length === 0) return <div>Loading...</div>;
 
   return (
     <div className="about-page">
@@ -102,17 +125,25 @@ const About = () => {
             </button>
             
             <div className="leader-card" style={{margin: '0 auto'}}>
-              <div className="leader-image-wrapper">
-                {leadershipTeam[currentLeader].image ? (
-                  <img src={leadershipTeam[currentLeader].image} alt={leadershipTeam[currentLeader].name} className="leader-img" style={{width: '200px', height: '200px', objectFit: 'cover', borderRadius: '50%'}} />
-                ) : (
-                  <div className="leader-image-placeholder" style={{width: '200px', height: '200px', margin: '0 auto'}}>
-                    <span>{leadershipTeam[currentLeader].name.charAt(0)}</span>
-                  </div>
-                )}
-              </div>
-              <h3 className="leader-name" style={{fontSize: '1.8rem'}}>{leadershipTeam[currentLeader].name}</h3>
-              <p className="leader-role" style={{fontSize: '1.2rem'}}>{leadershipTeam[currentLeader].role}</p>
+              {(() => {
+                const member = leadershipTeam[currentLeader];
+                const img = member.image || localTeamImages[member.name];
+                return (
+                  <>
+                    <div className="leader-image-wrapper">
+                      {img ? (
+                        <img src={img} alt={member.name} className="leader-img" style={{width: '200px', height: '200px', objectFit: 'cover', borderRadius: '50%'}} />
+                      ) : (
+                        <div className="leader-image-placeholder" style={{width: '200px', height: '200px', margin: '0 auto'}}>
+                          <span>{member.name.charAt(0)}</span>
+                        </div>
+                      )}
+                    </div>
+                    <h3 className="leader-name" style={{fontSize: '1.8rem'}}>{member.name}</h3>
+                    <p className="leader-role" style={{fontSize: '1.2rem'}}>{member.role}</p>
+                  </>
+                );
+              })()}
             </div>
             
             <button onClick={nextLeader} className="slider-btn next-btn" aria-label="Next leader">

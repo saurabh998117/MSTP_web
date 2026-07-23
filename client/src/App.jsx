@@ -15,6 +15,8 @@ import Portfolio from './pages/Portfolio';
 import CaseStudy from './pages/CaseStudy';
 import Testimonials from './components/Testimonials';
 import { servicesData } from './data/servicesData';
+import AdminLogin from './pages/admin/AdminLogin';
+import AdminPanel from './pages/admin/AdminPanel';
 
 // Component to scroll to top automatically on route navigation
 const ScrollToTop = () => {
@@ -27,24 +29,23 @@ const ScrollToTop = () => {
   return null;
 };
 
-function App() {
-  const [theme, setTheme] = useState('light');
+function AppContent({ theme, toggleTheme }) {
+  const location = useLocation();
+  const isAdmin = location.pathname.startsWith('/admin');
+  const [services, setServices] = useState([]);
 
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-  }, [theme]);
-
-  const toggleTheme = () => {
-    setTheme(prev => prev === 'light' ? 'dark' : 'light');
-  };
+    fetch('http://localhost:5000/api/services')
+      .then(res => res.json())
+      .then(data => setServices(data))
+      .catch(console.error);
+  }, []);
 
   return (
-    <Router>
-      <ScrollToTop />
-      <div className="app-container">
-        <Navbar theme={theme} toggleTheme={toggleTheme} />
-        <main>
-          <Routes>
+    <div className="app-container">
+      {!isAdmin && <Navbar theme={theme} toggleTheme={toggleTheme} />}
+      <main>
+        <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
@@ -66,18 +67,40 @@ function App() {
                   Comprehensive digital solutions to drive your business forward.
                 </p>
                 <div style={{display: 'flex', gap: '1rem', flexWrap: 'wrap', justifyContent: 'center'}}>
-                  {Object.entries(servicesData).map(([id, service]) => (
-                    <Link key={id} to={`/services/${id}`} className="btn btn-outline" style={{margin: '0.5rem'}}>
+                  {services.map((service) => (
+                    <Link key={service.id} to={`/services/${service.id}`} className="btn btn-outline" style={{margin: '0.5rem'}}>
                       {service.title}
                     </Link>
                   ))}
                 </div>
               </div>
             } />
+            
+            {/* Admin Routes */}
+            <Route path="/admin/login" element={<AdminLogin />} />
+            <Route path="/admin/*" element={<AdminPanel />} />
           </Routes>
         </main>
-        <Footer />
+        {!isAdmin && <Footer />}
       </div>
+  );
+}
+
+function App() {
+  const [theme, setTheme] = useState('light');
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(prev => prev === 'light' ? 'dark' : 'light');
+  };
+
+  return (
+    <Router>
+      <ScrollToTop />
+      <AppContent theme={theme} toggleTheme={toggleTheme} />
     </Router>
   );
 }

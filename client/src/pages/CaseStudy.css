@@ -1,7 +1,7 @@
 .case-study-page {
-  background-color: #f3ede2; /* Same beige background */
+  background-color: var(--bg-primary);
   min-height: 100vh;
-  color: #1a1a1a;
+  color: var(--text-primary);
 }
 
 /* Header Section */
@@ -17,13 +17,13 @@
   font-size: 2.2rem;
   font-weight: 700;
   margin-bottom: 1.5rem;
-  color: #1a1a1a;
+  color: var(--text-primary);
 }
 
 .cs-description {
   font-size: 1.05rem;
   line-height: 1.6;
-  color: #333;
+  color: var(--text-secondary);
 }
 
 .cs-header-image {
@@ -48,11 +48,11 @@
   font-size: 1.6rem;
   font-weight: 700;
   margin-bottom: 3rem;
-  color: #1a1a1a;
+  color: var(--text-primary);
 }
 
 .highlight-green {
-  color: #00e676; /* Neon green */
+  color: var(--accent-primary);
 }
 
 /* 01. Challenge */
@@ -66,7 +66,7 @@
 .cs-challenge-text {
   font-size: 1.05rem;
   line-height: 1.6;
-  color: #333;
+  color: var(--text-secondary);
 }
 
 .cs-challenge-icons {
@@ -80,7 +80,7 @@
   align-items: center;
   gap: 1rem;
   font-weight: 600;
-  color: #00e676;
+  color: var(--accent-primary);
 }
 
 .challenge-icon-box {
@@ -98,7 +98,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: #1a1a1a;
+  color: var(--text-primary);
   flex-wrap: wrap;
   gap: 1rem;
 }
@@ -115,19 +115,19 @@
 .process-icon-circle {
   width: 80px;
   height: 80px;
-  background-color: #f3f4f6;
-  border: 1px dashed #3b82f6;
+  background-color: var(--bg-secondary);
+  border: 1px dashed var(--accent-primary);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #1a1a1a;
+  color: var(--text-primary);
 }
 
 .process-name {
   font-size: 0.95rem;
   font-weight: 500;
-  color: #333;
+  color: var(--text-secondary);
 }
 
 .process-arrow {
@@ -135,7 +135,7 @@
   right: -50%;
   top: 40px;
   transform: translateY(-50%);
-  color: #3b82f6;
+  color: var(--accent-primary);
   font-weight: bold;
 }
 
@@ -153,14 +153,14 @@
   align-items: center;
   gap: 1rem;
   font-weight: 600;
-  color: #333;
+  color: var(--text-primary);
 }
 
 .tool-logo-placeholder {
   width: 80px;
   height: 80px;
-  background-color: #0a0a0a;
-  color: #00e676;
+  background-color: var(--bg-secondary);
+  color: var(--accent-primary);
   font-size: 2.5rem;
   font-weight: bold;
   display: flex;
@@ -171,8 +171,8 @@
 
 /* 04. Testimonial */
 .cs-testimonial-box {
-  background-color: #f3ede2; /* Same as page background but with border */
-  border: 1px solid #ccc;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
   border-radius: 20px;
   padding: 3rem;
   max-width: 700px;
@@ -184,14 +184,14 @@
   position: absolute;
   top: -24px;
   left: 30px;
-  background-color: #f3ede2;
+  background-color: var(--bg-secondary);
   padding: 0 10px;
 }
 
 .cs-testimonial-text {
   font-size: 1.1rem;
   line-height: 1.7;
-  color: #333;
+  color: var(--text-secondary);
   margin-bottom: 2rem;
   font-style: italic;
 }
@@ -207,17 +207,17 @@
   height: 60px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid #00e676;
+  border: 2px solid var(--accent-primary);
 }
 
 .author-info h4 {
   margin: 0 0 0.2rem 0;
-  color: #1a1a1a;
+  color: var(--text-primary);
 }
 
 .author-info span {
   font-size: 0.9rem;
-  color: #666;
+  color: var(--text-secondary);
 }
 
 /* Responsive */

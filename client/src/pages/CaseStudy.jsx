@@ -1,18 +1,50 @@
-import { useParams, Navigate } from 'react-router-dom';
-import { portfolioData } from '../data/portfolioData';
+import { useParams, Navigate, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 import './CaseStudy.css';
 import { 
   FileText, Search, Layout, Code, PlayCircle, Rocket, 
   Monitor, RefreshCw, XCircle, Users, Quote
 } from 'lucide-react';
 
+import ekatrGif from '../assets/portfolio/एkatr Events.gif';
+import constaGif from '../assets/portfolio/Consta AI Solutions.gif';
+import aquaGif from '../assets/portfolio/myaquaplus.gif';
+import satoshiGif from '../assets/portfolio/STF Gold.gif';
+import rccmGif from '../assets/portfolio/BCCM Global_A2.gif';
+import samraatGif from '../assets/portfolio/SAMRAAT LOGS_ A1.gif';
+
+const localPortfolioImages = {
+  'ekatr': ekatrGif,
+  'consta': constaGif,
+  'samraat-logs': samraatGif,
+  'aquaplus': aquaGif,
+  'satoshifx': satoshiGif,
+  'rccm-global': rccmGif
+};
+
 const CaseStudy = () => {
   const { id } = useParams();
-  const project = portfolioData[id];
+  const navigate = useNavigate();
+  const [project, setProject] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  if (!project) {
-    return <Navigate to="/portfolio" replace />;
-  }
+  useEffect(() => {
+    fetch('http://localhost:5000/api/portfolios')
+      .then(res => res.json())
+      .then(data => {
+        const found = data.find(p => p.id === id);
+        if (found) {
+          setProject(found);
+        } else {
+          navigate('/portfolio');
+        }
+      })
+      .catch(console.error)
+      .finally(() => setLoading(false));
+  }, [id, navigate]);
+
+  if (loading) return <div style={{paddingTop: '100px', textAlign: 'center'}}>Loading case study...</div>;
+  if (!project) return null;
 
   // Icons for Challenge section
   const challengeIcons = [
@@ -32,6 +64,8 @@ const CaseStudy = () => {
     { name: 'Deploy', icon: <Rocket size={24} /> }
   ];
 
+  const heroImage = project.image || localPortfolioImages[project.id];
+
   return (
     <div className="case-study-page">
       <div className="container" style={{paddingTop: '6rem', paddingBottom: '4rem'}}>
@@ -45,7 +79,7 @@ const CaseStudy = () => {
             <p className="cs-description">{project.description}</p>
           </div>
           <div className="cs-header-image">
-            <img src={project.image} alt={project.title} className="cs-hero-img" />
+            <img src={heroImage} alt={project.title} className="cs-hero-img" />
           </div>
         </div>
 
@@ -57,7 +91,7 @@ const CaseStudy = () => {
               <p>{project.challengeDescription}</p>
             </div>
             <div className="cs-challenge-icons">
-              {project.challenges.map((challenge, idx) => (
+              {project.challenges && project.challenges.map((challenge, idx) => (
                 <div className="challenge-item" key={idx}>
                   <div className="challenge-icon-box">
                     {challengeIcons[idx % challengeIcons.length]}
@@ -91,7 +125,7 @@ const CaseStudy = () => {
         <div className="cs-section">
           <h2 className="cs-section-title"><span className="highlight-green">03.</span> Tools Used</h2>
           <div className="cs-tools-grid">
-            {project.tools.map((tool, idx) => (
+            {project.tools && project.tools.map((tool, idx) => (
               <div className="tool-box" key={idx}>
                 {tool.icon ? (
                   <img src={tool.icon} alt={tool.name} style={{width: '70px', height: '70px', objectFit: 'contain', marginBottom: '0.5rem'}} />
@@ -107,24 +141,26 @@ const CaseStudy = () => {
         </div>
 
         {/* 04. Testimonial */}
-        <div className="cs-section">
-          <h2 className="cs-section-title"><span className="highlight-green">04.</span> Testimonial</h2>
-          <div className="cs-testimonial-box">
-            <div className="quote-icon-large">
-              <Quote size={48} color="#00e676" />
-            </div>
-            <p className="cs-testimonial-text">
-              "{project.testimonial.text}"
-            </p>
-            <div className="cs-testimonial-author">
-              <img src={project.testimonial.avatar} alt={project.testimonial.author} className="author-avatar" />
-              <div className="author-info">
-                <h4>{project.testimonial.author}</h4>
-                <span>{project.testimonial.role}</span>
+        {project.testimonial && project.testimonial.text && (
+          <div className="cs-section">
+            <h2 className="cs-section-title"><span className="highlight-green">04.</span> Testimonial</h2>
+            <div className="cs-testimonial-box">
+              <div className="quote-icon-large">
+                <Quote size={48} color="var(--accent-primary)" />
+              </div>
+              <p className="cs-testimonial-text">
+                "{project.testimonial.text}"
+              </p>
+              <div className="cs-testimonial-author">
+                <img src={project.testimonial.avatar} alt={project.testimonial.author} className="author-avatar" />
+                <div className="author-info">
+                  <h4>{project.testimonial.author}</h4>
+                  <span>{project.testimonial.role}</span>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        )}
 
       </div>
     </div>

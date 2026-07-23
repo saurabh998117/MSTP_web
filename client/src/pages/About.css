@@ -258,6 +258,7 @@
 .leader-role {
   color: var(--text-secondary);
   text-align: center;
+  margin-bottom: 2rem;
 }
 
 .consultation-action {

@@ -1,26 +1,54 @@
+import React, { useState, useEffect } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { portfolioData } from '../data/portfolioData';
 import './Portfolio.css';
 
+import ekatrGif from '../assets/portfolio/एkatr Events.gif';
+import constaGif from '../assets/portfolio/Consta AI Solutions.gif';
+import aquaGif from '../assets/portfolio/myaquaplus.gif';
+import satoshiGif from '../assets/portfolio/STF Gold.gif';
+import rccmGif from '../assets/portfolio/BCCM Global_A2.gif';
+import samraatGif from '../assets/portfolio/SAMRAAT LOGS_ A1.gif';
+
+const localPortfolioImages = {
+  'ekatr': ekatrGif,
+  'consta': constaGif,
+  'samraat-logs': samraatGif,
+  'aquaplus': aquaGif,
+  'satoshifx': satoshiGif,
+  'rccm-global': rccmGif
+};
+
 const Portfolio = () => {
+  const [portfolios, setPortfolios] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:5000/api/portfolios')
+      .then(res => res.json())
+      .then(data => setPortfolios(data))
+      .catch(console.error);
+  }, []);
+
   return (
     <div className="portfolio-page">
       <div className="container" style={{paddingTop: '8rem', paddingBottom: '4rem'}}>
         <h2 className="portfolio-main-title">Delivered by WhiteCircle Group</h2>
         
         <div className="portfolio-grid">
-          {Object.values(portfolioData).map((project) => (
-            <div className="portfolio-item" key={project.id}>
-              <h3 className="portfolio-item-title">{project.title}</h3>
-              <Link to={`/portfolio/${project.id}`} className="portfolio-image-link">
-                <img src={project.image} alt={project.title} className="portfolio-image" />
-                <div className="portfolio-overlay">
-                  <span className="view-case-study">View Case Study <ArrowRight size={16} /></span>
-                </div>
-              </Link>
-            </div>
-          ))}
+          {portfolios.map((project) => {
+            const projectImg = project.image || localPortfolioImages[project.id];
+            return (
+              <div className="portfolio-item" key={project.id}>
+                <h3 className="portfolio-item-title">{project.title}</h3>
+                <Link to={`/portfolio/${project.id}`} className="portfolio-image-link">
+                  <img src={projectImg} alt={project.title} className="portfolio-image" />
+                  <div className="portfolio-overlay">
+                    <span className="view-case-study">View Case Study <ArrowRight size={16} /></span>
+                  </div>
+                </Link>
+              </div>
+            );
+          })}
         </div>
 
         {/* CTA Section */}
@@ -30,7 +58,7 @@ const Portfolio = () => {
               Let's turn your idea into<br />a <span className="highlight-green">real-life product.</span>
             </h2>
             <Link to="/contact" className="btn btn-green">
-              <div style={{display: 'flex', alignItems: 'center', gap: '0.5rem', backgroundColor: '#000', padding: '0.3rem', borderRadius: '50%', color: '#00e676'}}>
+              <div style={{display: 'flex', alignItems: 'center', gap: '0.5rem', backgroundColor: 'var(--bg-primary)', padding: '0.3rem', borderRadius: '50%', color: 'var(--accent-primary)'}}>
                 <ArrowRight size={16} />
               </div>
               Get In Touch

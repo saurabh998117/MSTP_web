@@ -21,13 +21,13 @@ import iconTesting from '../assets/services/new25 14.png';
 import iconStaffing from '../assets/services/new25 21.png';
 import iconPayment from '../assets/services/payment.png';
 import iconCloud from '../assets/services/cloudhost.png';
-import iconShopify from '../assets/services/cloud.png'; // Fallback
-import iconOracle from '../assets/services/iot 4.png'; // Fallback
+import iconShopify from '../assets/services/shopify.png';
+import iconOracle from '../assets/services/oracle.png';
 
 import iconICO from '../assets/services/ico 2.png';
 import iconToken from '../assets/services/token.png';
 import iconWeb3 from '../assets/services/web3.png';
-import iconDApp from '../assets/services/iot 6.png'; // Fallback
+import iconDApp from '../assets/services/dapp.png';
 import iconWallet from '../assets/services/wallet.png';
 import iconExchange from '../assets/services/exchange.png';
 import iconMLM from '../assets/services/mlm.png';

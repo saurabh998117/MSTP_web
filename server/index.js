@@ -11,14 +11,20 @@ const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(cors());
-app.use(express.json());
+app.use(express.json({ limit: '50mb' })); // Increased limit for Base64 images
+app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
 // Debug
 console.log("MONGO_URI VALUE ", process.env.MONGO_URI);
 
+const seedDatabase = require('./seedData');
+
 // MongoDB Connection
 mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log("MongoDB Connected"))
+  .then(() => {
+    console.log("MongoDB Connected");
+    seedDatabase();
+  })
   .catch(err => console.log("DB Error:", err));
 
 // Schema
@@ -67,6 +73,11 @@ const sendEmails = async (res, userEmail, userName, hrSubject, hrBody, userSubje
     res.status(500).json({ error: 'Failed to send email. Please try again later.' });
   }
 };
+
+// Admin Authentication Setup
+const Admin = require('./models/Admin');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 // 1. Contact Form Endpoint
 app.post('/api/contact', async (req, res) => {
@@ -201,6 +212,70 @@ app.post('/api/apply', async (req, res) => {
     res.status(500).json({ error: 'Failed to process application. Please try again later.' });
   }
 });
+
+// ==========================================
+// ADMIN AUTHENTICATION ROUTES
+// ==========================================
+
+// Initial setup to create the first admin (Disable or secure after first use!)
+app.post('/api/admin/setup', async (req, res) => {
+  const { email, password } = req.body;
+  try {
+    const existingAdmin = await Admin.findOne({ email });
+    if (existingAdmin) {
+      return res.status(400).json({ error: 'Admin already exists' });
+    }
+
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+
+    const newAdmin = new Admin({ email, password: hashedPassword });
+    await newAdmin.save();
+
+    res.status(201).json({ message: 'Admin created successfully' });
+  } catch (error) {
+    res.status(500).json({ error: 'Server error during setup' });
+  }
+});
+
+// Admin Login
+app.post('/api/admin/login', async (req, res) => {
+  const { email, password } = req.body;
+  try {
+    const admin = await Admin.findOne({ email });
+    if (!admin) {
+      return res.status(400).json({ error: 'Invalid credentials' });
+    }
+
+    const isMatch = await bcrypt.compare(password, admin.password);
+    if (!isMatch) {
+      return res.status(400).json({ error: 'Invalid credentials' });
+    }
+
+    const payload = {
+      admin: {
+        id: admin.id
+      }
+    };
+
+    jwt.sign(
+      payload,
+      process.env.JWT_SECRET || 'fallback_secret_for_dev',
+      { expiresIn: '24h' },
+      (err, token) => {
+        if (err) throw err;
+        res.json({ token, email: admin.email });
+      }
+    );
+  } catch (error) {
+    res.status(500).json({ error: 'Server error during login' });
+  }
+});
+
+// ==========================================
+// CONTENT & DATA ROUTES (CRUD)
+// ==========================================
+app.use('/api', require('./routes/contentRoutes'));
 
 // ✅ SERVE FRONTEND (IMPORTANT)
 const __dirnamePath = path.resolve();
