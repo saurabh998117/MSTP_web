@@ -17,6 +17,7 @@ import Testimonials from './components/Testimonials';
 import { servicesData } from './data/servicesData';
 import AdminLogin from './pages/admin/AdminLogin';
 import AdminPanel from './pages/admin/AdminPanel';
+import { API_BASE_URL } from './apiConfig';
 
 // Component to scroll to top automatically on route navigation
 const ScrollToTop = () => {
@@ -35,7 +36,7 @@ function AppContent({ theme, toggleTheme }) {
   const [services, setServices] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/services')
+    fetch(`${API_BASE_URL}/api/services`)
       .then(res => res.json())
       .then(data => setServices(data))
       .catch(console.error);

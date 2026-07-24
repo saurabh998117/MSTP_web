@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Briefcase, MapPin, Clock, HeartPulse, Laptop, TrendingUp, DollarSign, Search, Calendar, ChevronDown, ChevronUp, ArrowRight } from 'lucide-react';
 import './Careers.css';
 import { Link } from 'react-router-dom';
+import { API_BASE_URL } from '../apiConfig';
 
 const Careers = () => {
   const [expandedJobId, setExpandedJobId] = useState(null);
@@ -10,12 +11,12 @@ const Careers = () => {
   const [settings, setSettings] = useState({});
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/careers')
+    fetch(`${API_BASE_URL}/api/careers`)
       .then(res => res.json())
       .then(data => setJobs(data))
       .catch(console.error);
 
-    fetch('http://localhost:5000/api/settings')
+    fetch(`${API_BASE_URL}/api/settings`)
       .then(res => res.json())
       .then(data => setSettings(data))
       .catch(console.error);

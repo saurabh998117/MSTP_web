@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { API_BASE_URL } from '../../../apiConfig';
 
 const PortfolioTab = () => {
   const [portfolios, setPortfolios] = useState([]);
@@ -16,7 +17,7 @@ const PortfolioTab = () => {
 
   const fetchPortfolios = async () => {
     try {
-      const res = await fetch('http://localhost:5000/api/portfolios');
+      const res = await fetch(`${API_BASE_URL}/api/portfolios`);
       const data = await res.json();
       setPortfolios(data);
     } catch (err) {
@@ -56,7 +57,7 @@ const PortfolioTab = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const method = editingId ? 'PUT' : 'POST';
-    const url = editingId ? `http://localhost:5000/api/portfolios/${editingId}` : 'http://localhost:5000/api/portfolios';
+    const url = editingId ? `${API_BASE_URL}/api/portfolios/${editingId}` : `${API_BASE_URL}/api/portfolios`;
     
     try {
       await fetch(url, {
@@ -77,7 +78,7 @@ const PortfolioTab = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this case study?')) {
       try {
-        await fetch(`http://localhost:5000/api/portfolios/${id}`, {
+        await fetch(`${API_BASE_URL}/api/portfolios/${id}`, {
           method: 'DELETE',
           headers: { 'Authorization': `Bearer ${localStorage.getItem('adminToken')}` }
         });

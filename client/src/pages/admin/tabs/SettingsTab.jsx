@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { API_BASE_URL } from '../../../apiConfig';
 
 const SettingsTab = () => {
   const [settings, setSettings] = useState({
@@ -26,7 +27,7 @@ const SettingsTab = () => {
 
   const fetchSettings = async () => {
     try {
-      const res = await fetch('http://localhost:5000/api/settings');
+      const res = await fetch(`${API_BASE_URL}/api/settings`);
       const data = await res.json();
       if (data && data._id) {
         setSettings(data);
@@ -67,8 +68,8 @@ const SettingsTab = () => {
     setMessage('');
     
     try {
-      const res = await fetch('http://localhost:5000/api/settings', {
-        method: 'POST',
+      const res = await fetch(`${API_BASE_URL}/api/settings`, {
+        method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${localStorage.getItem('adminToken')}`

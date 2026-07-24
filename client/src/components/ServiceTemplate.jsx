@@ -2,6 +2,7 @@ import { useParams, Navigate, useNavigate } from 'react-router-dom';
 import { CheckCircle2, Code2, MessageSquare, LayoutList, TestTube, Rocket, Settings } from 'lucide-react';
 import React, { useState, useEffect } from 'react';
 import './ServiceTemplate.css';
+import { API_BASE_URL } from '../apiConfig';
 
 import gifIT from '../assets/services/it service F.gif';
 import gifSalesforce from '../assets/services/Salesforce-F.gif';
@@ -87,7 +88,7 @@ const ServiceTemplate = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/services')
+    fetch(`${API_BASE_URL}/api/services`)
       .then(res => res.json())
       .then(data => {
         const found = data.find(s => s.id === serviceId);

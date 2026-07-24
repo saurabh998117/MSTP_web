@@ -1,6 +1,7 @@
 import { useParams, Navigate, useNavigate } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import './CaseStudy.css';
+import { API_BASE_URL } from '../apiConfig';
 import { 
   FileText, Search, Layout, Code, PlayCircle, Rocket, 
   Monitor, RefreshCw, XCircle, Users, Quote
@@ -29,7 +30,7 @@ const CaseStudy = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/portfolios')
+    fetch(`${API_BASE_URL}/api/portfolios`)
       .then(res => res.json())
       .then(data => {
         const found = data.find(p => p.id === id);

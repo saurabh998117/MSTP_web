@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { ShieldCheck } from 'lucide-react';
+import { API_BASE_URL } from '../apiConfig';
 import './PrivacyPage.css';
 
 const PrivacyPage = () => {
   const [privacyText, setPrivacyText] = useState('');
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/settings')
+    fetch(`${API_BASE_URL}/api/settings`)
       .then(res => res.json())
       .then(data => {
         if (data && data.privacyPolicy) {

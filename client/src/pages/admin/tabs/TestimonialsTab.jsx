@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { API_BASE_URL } from '../../../apiConfig';
 
 const TestimonialsTab = () => {
   const [testimonials, setTestimonials] = useState([]);
@@ -16,7 +17,7 @@ const TestimonialsTab = () => {
 
   const fetchTestimonials = async () => {
     try {
-      const res = await fetch('http://localhost:5000/api/testimonials');
+      const res = await fetch(`${API_BASE_URL}/api/testimonials`);
       const data = await res.json();
       setTestimonials(data);
     } catch (err) {
@@ -56,7 +57,7 @@ const TestimonialsTab = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const method = editingId ? 'PUT' : 'POST';
-    const url = editingId ? `http://localhost:5000/api/testimonials/${editingId}` : 'http://localhost:5000/api/testimonials';
+    const url = editingId ? `${API_BASE_URL}/api/testimonials/${editingId}` : `${API_BASE_URL}/api/testimonials`;
     
     try {
       await fetch(url, {
@@ -77,7 +78,7 @@ const TestimonialsTab = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this testimonial?')) {
       try {
-        await fetch(`http://localhost:5000/api/testimonials/${id}`, {
+        await fetch(`${API_BASE_URL}/api/testimonials/${id}`, {
           method: 'DELETE',
           headers: { 'Authorization': `Bearer ${localStorage.getItem('adminToken')}` }
         });

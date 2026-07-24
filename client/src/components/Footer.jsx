@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { MapPin, Mail, Phone } from 'lucide-react';
+import { API_BASE_URL } from '../apiConfig';
 import './Footer.css';
 import instaIcon from '../assets/home/insta.png';
 import linkedinIcon from '../assets/home/linkdin.png';
@@ -10,7 +11,7 @@ const Footer = () => {
   const [settings, setSettings] = useState({});
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/settings')
+    fetch(`${API_BASE_URL}/api/settings`)
       .then(res => res.json())
       .then(data => setSettings(data))
       .catch(console.error);

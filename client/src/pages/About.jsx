@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { CheckCircle2, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Testimonials from '../components/Testimonials';
+import { API_BASE_URL } from '../apiConfig';
 import './About.css';
 
 import missionImg from '../assets/aboutus/image 661.png';
@@ -24,7 +25,7 @@ const About = () => {
   const [leadershipTeam, setLeadershipTeam] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/team')
+    fetch(`${API_BASE_URL}/api/team`)
       .then(res => res.json())
       .then(data => {
         if (data && data.length > 0) {

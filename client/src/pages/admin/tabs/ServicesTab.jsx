@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { API_BASE_URL } from '../../../apiConfig';
 
 const ServicesTab = () => {
   const [services, setServices] = useState([]);
@@ -16,7 +17,7 @@ const ServicesTab = () => {
 
   const fetchServices = async () => {
     try {
-      const res = await fetch('http://localhost:5000/api/services');
+      const res = await fetch(`${API_BASE_URL}/api/services`);
       const data = await res.json();
       setServices(data);
     } catch (err) {
@@ -56,7 +57,7 @@ const ServicesTab = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const method = editingId ? 'PUT' : 'POST';
-    const url = editingId ? `http://localhost:5000/api/services/${editingId}` : 'http://localhost:5000/api/services';
+    const url = editingId ? `${API_BASE_URL}/api/services/${editingId}` : `${API_BASE_URL}/api/services`;
     
     try {
       await fetch(url, {
@@ -77,7 +78,7 @@ const ServicesTab = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this service?')) {
       try {
-        await fetch(`http://localhost:5000/api/services/${id}`, {
+        await fetch(`${API_BASE_URL}/api/services/${id}`, {
           method: 'DELETE',
           headers: { 'Authorization': `Bearer ${localStorage.getItem('adminToken')}` }
         });

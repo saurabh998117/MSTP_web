@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { API_BASE_URL } from '../../../apiConfig';
 
 const TeamTab = () => {
   const [team, setTeam] = useState([]);
@@ -16,7 +17,7 @@ const TeamTab = () => {
 
   const fetchTeam = async () => {
     try {
-      const res = await fetch('http://localhost:5000/api/team');
+      const res = await fetch(`${API_BASE_URL}/api/team`);
       const data = await res.json();
       setTeam(data);
     } catch (err) {
@@ -56,7 +57,7 @@ const TeamTab = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const method = editingId ? 'PUT' : 'POST';
-    const url = editingId ? `http://localhost:5000/api/team/${editingId}` : 'http://localhost:5000/api/team';
+    const url = editingId ? `${API_BASE_URL}/api/team/${editingId}` : `${API_BASE_URL}/api/team`;
     
     try {
       await fetch(url, {
@@ -77,7 +78,7 @@ const TeamTab = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this team member?')) {
       try {
-        await fetch(`http://localhost:5000/api/team/${id}`, {
+        await fetch(`${API_BASE_URL}/api/team/${id}`, {
           method: 'DELETE',
           headers: { 'Authorization': `Bearer ${localStorage.getItem('adminToken')}` }
         });

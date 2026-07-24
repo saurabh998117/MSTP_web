@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { ChevronRight, Star, MessageSquare, Globe, Users } from 'lucide-react';
+import { API_BASE_URL } from '../apiConfig';
 import './Testimonials.css';
 
 // Default user profile avatar
@@ -18,7 +19,7 @@ const Testimonials = () => {
   }]);
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/testimonials')
+    fetch(`${API_BASE_URL}/api/testimonials`)
       .then(res => res.json())
       .then(data => {
         if (data && data.length > 0) setTestimonials(data);

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { API_BASE_URL } from '../../../apiConfig';
 
 const CareersTab = () => {
   const [careers, setCareers] = useState([]);
@@ -18,7 +19,7 @@ const CareersTab = () => {
 
   const fetchCareers = async () => {
     try {
-      const res = await fetch('http://localhost:5000/api/careers');
+      const res = await fetch(`${API_BASE_URL}/api/careers`);
       const data = await res.json();
       setCareers(data);
     } catch (err) {
@@ -63,7 +64,7 @@ const CareersTab = () => {
   const saveJob = async (statusToSet) => {
     const payload = { ...formData, status: statusToSet };
     const method = editingId ? 'PUT' : 'POST';
-    const url = editingId ? `http://localhost:5000/api/careers/${editingId}` : 'http://localhost:5000/api/careers';
+    const url = editingId ? `${API_BASE_URL}/api/careers/${editingId}` : `${API_BASE_URL}/api/careers`;
     
     try {
       await fetch(url, {
@@ -89,7 +90,7 @@ const CareersTab = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this job posting?')) {
       try {
-        await fetch(`http://localhost:5000/api/careers/${id}`, {
+        await fetch(`${API_BASE_URL}/api/careers/${id}`, {
           method: 'DELETE',
           headers: { 'Authorization': `Bearer ${localStorage.getItem('adminToken')}` }
         });

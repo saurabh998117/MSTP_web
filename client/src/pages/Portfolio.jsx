@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import './Portfolio.css';
+import { API_BASE_URL } from '../apiConfig';
 
 import ekatrGif from '../assets/portfolio/एkatr Events.gif';
 import constaGif from '../assets/portfolio/Consta AI Solutions.gif';
@@ -23,7 +24,7 @@ const Portfolio = () => {
   const [portfolios, setPortfolios] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/portfolios')
+    fetch(`${API_BASE_URL}/api/portfolios`)
       .then(res => res.json())
       .then(data => setPortfolios(data))
       .catch(console.error);
